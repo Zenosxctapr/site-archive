@@ -5,1496 +5,605 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Trenches Archive</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --cream: #f5f0e8;
-  --cream2: #ede8de;
-  --cream3: #e4ddd0;
-  --ink: #1a1714;
-  --ink2: #2e2a25;
-  --ink3: #4a4540;
-  --muted: #7a7268;
-  --rule: #c8bfb0;
-  --rule-light: #ddd6c8;
-  --red: #9b2020;
-  --green: #1a5c35;
-  --col-meme: #7a3a00;
-  --col-ai: #1a3a6b;
-  --col-sol: #3d1a7a;
-  --col-bnb: #6b4400;
-  --col-rug: #7a1a1a;
-  --col-macro: #1a4a2a;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--cream);
-  color: var(--ink);
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-/* ── PAGES ── */
-.page { min-height: 100vh; }
-#page-home { display: flex; flex-direction: column; }
-#page-archive { display: none; flex-direction: column; }
-#page-archive.active, #page-home.active { display: flex; }
-
-/* ── MASTHEAD ── */
-.masthead {
-  border-bottom: 3px double var(--ink);
-  padding: 0 3rem;
-  background: var(--cream);
-}
-
-.masthead-top {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  padding: 1.4rem 0 1rem;
-  gap: 1rem;
-}
-
-.masthead-left {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.masthead-left span { display: block; }
-
-.masthead-title {
-  text-align: center;
-}
-
-.masthead-title h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 54px;
-  font-weight: 900;
-  letter-spacing: -0.01em;
-  line-height: 1;
-  color: var(--ink);
-}
-
-.masthead-title .subtitle {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9.5px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 5px;
-}
-
-.masthead-right {
-  text-align: right;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 0.06em;
-}
-
-.masthead-right span { display: block; }
-
-.masthead-rule {
-  border-top: 1px solid var(--ink);
-  padding: 4px 0;
-  display: flex;
-  gap: 0;
-  align-items: center;
-}
-
-.nav-links {
-  display: flex;
-  gap: 0;
-  flex: 1;
-}
-
-.nav-link {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink3);
-  text-decoration: none;
-  padding: 4px 14px 4px 0;
-  border-right: 1px solid var(--rule);
-  margin-right: 14px;
-  cursor: pointer;
-  transition: color 0.1s;
-  background: none;
-  border-top: none;
-  border-bottom: none;
-  border-left: none;
-}
-
-.nav-link:hover { color: var(--ink); }
-.nav-link.active { color: var(--ink); font-weight: 500; }
-
-/* ── HOMEPAGE ── */
-.home-body {
-  flex: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-  padding: 0 3rem 4rem;
-}
-
-.home-dateline {
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-  padding: 10px 0;
-  margin: 2rem 0;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.home-dateline .edition {
-  background: var(--ink);
-  color: var(--cream);
-  padding: 2px 8px;
-  font-size: 9px;
-}
-
-/* HERO SECTION */
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1px 1fr 1px 1fr;
-  gap: 0;
-  border-top: 2px solid var(--ink);
-  border-bottom: 1px solid var(--rule);
-  margin-bottom: 2.5rem;
-}
-
-.hero-col {
-  padding: 2rem 2rem 2rem 0;
-}
-
-.hero-col:not(:first-child) {
-  padding-left: 2rem;
-}
-
-.hero-divider {
-  background: var(--rule);
-  width: 1px;
-  margin: 1rem 0;
-}
-
-.hero-col-1 {
-  grid-column: 1;
-}
-
-.hero-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.hero-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--rule-light);
-}
-
-.hero-col h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 38px;
-  font-weight: 700;
-  line-height: 1.1;
-  color: var(--ink);
-  margin-bottom: 1rem;
-}
-
-.hero-col h2 em {
-  font-style: italic;
-  font-weight: 400;
-}
-
-.hero-col p {
-  font-size: 13.5px;
-  line-height: 1.7;
-  color: var(--ink2);
-}
-
-.hero-col p + p {
-  margin-top: 0.8rem;
-}
-
-.hero-col-2 h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 0.7rem;
-  color: var(--ink);
-}
-
-.hero-col-3 h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 0.7rem;
-  color: var(--ink);
-}
-
-/* STATS ROW */
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  border-top: 2px solid var(--ink);
-  border-bottom: 1px solid var(--rule);
-  margin-bottom: 2.5rem;
-}
-
-.stat-cell {
-  padding: 1.2rem 1.4rem;
-  border-right: 1px solid var(--rule);
-}
-
-.stat-cell:last-child { border-right: none; }
-
-.stat-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 6px;
-}
-
-.stat-value {
-  font-family: 'Playfair Display', serif;
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1;
-}
-
-.stat-sub {
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 3px;
-}
-
-/* ERA CARDS */
-.era-section-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 1rem;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--rule-light);
-}
-
-.era-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--rule);
-  border: 1px solid var(--rule);
-  margin-bottom: 2.5rem;
-}
-
-.era-card {
-  background: var(--cream);
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: background 0.12s;
-  position: relative;
-}
-
-.era-card:hover { background: var(--cream2); }
-
-.era-card-accent {
-  width: 24px;
-  height: 3px;
-  margin-bottom: 1rem;
-}
-
-.era-card h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 6px;
-  color: var(--ink);
-}
-
-.era-card .era-period {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-
-.era-card p {
-  font-size: 12.5px;
-  color: var(--ink3);
-  line-height: 1.55;
-}
-
-.era-card .era-count {
-  margin-top: 1rem;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 0.06em;
-}
-
-.enter-btn {
-  display: inline-block;
-  margin-top: 2rem;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--cream);
-  background: var(--ink);
-  padding: 12px 28px;
-  border: none;
-  cursor: pointer;
-  transition: background 0.12s;
-}
-
-.enter-btn:hover { background: var(--ink2); }
-
-.home-footer-rule {
-  border-top: 1px solid var(--rule);
-  padding-top: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
-}
-
-.disclaimer {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9.5px;
-  color: var(--muted);
-  line-height: 1.6;
-  max-width: 600px;
-  letter-spacing: 0.02em;
-}
-
-/* ══════════════════════════════════
-   ARCHIVE PAGE
-══════════════════════════════════ */
-.archive-body {
-  flex: 1;
-  max-width: 1100px;
-  margin: 0 auto;
-  width: 100%;
-  padding: 0 3rem 6rem;
-}
-
-.archive-controls {
-  border-bottom: 1px solid var(--rule);
-  padding: 1rem 0;
-  display: flex;
-  align-items: center;
-  gap: 0;
-  flex-wrap: wrap;
-  row-gap: 6px;
-}
-
-.filter-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-right: 12px;
-  white-space: nowrap;
-}
-
-.fbtn {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 4px 12px;
-  border: 1px solid var(--rule);
-  background: transparent;
-  color: var(--ink3);
-  cursor: pointer;
-  transition: all 0.12s;
-  margin-right: 4px;
-}
-
-.fbtn:hover { border-color: var(--ink3); color: var(--ink); }
-.fbtn.on { background: var(--ink); color: var(--cream); border-color: var(--ink); }
-
-.fbtn[data-f="meme"].on { background: var(--col-meme); border-color: var(--col-meme); }
-.fbtn[data-f="ai"].on { background: var(--col-ai); border-color: var(--col-ai); }
-.fbtn[data-f="sol"].on { background: var(--col-sol); border-color: var(--col-sol); }
-.fbtn[data-f="bnb"].on { background: var(--col-bnb); border-color: var(--col-bnb); }
-.fbtn[data-f="rug"].on { background: var(--col-rug); border-color: var(--col-rug); }
-.fbtn[data-f="macro"].on { background: var(--col-macro); border-color: var(--col-macro); }
-
-/* YEAR SECTION */
-.year-section { margin-bottom: 0; }
-
-.year-header {
-  display: flex;
-  align-items: baseline;
-  gap: 1.5rem;
-  padding: 2.5rem 0 1.2rem;
-  border-bottom: 2px solid var(--ink);
-  margin-bottom: 0;
-}
-
-.year-header.hide { display: none; }
-
-.year-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 72px;
-  font-weight: 900;
-  line-height: 1;
-  color: var(--cream3);
-  letter-spacing: -0.02em;
-  user-select: none;
-  flex-shrink: 0;
-  -webkit-text-stroke: 1px var(--rule);
-  text-stroke: 1px var(--rule);
-}
-
-.year-info {
-  flex: 1;
-}
-
-.year-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 700;
-  font-style: italic;
-  color: var(--ink);
-}
-
-.year-desc {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 3px;
-  font-family: 'IBM Plex Sans', sans-serif;
-}
-
-/* TIMELINE ROWS */
-.tl-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.tl-row {
-  border-bottom: 1px solid var(--rule-light);
-  transition: background 0.1s;
-}
-
-.tl-row:hover { background: rgba(0,0,0,0.015); }
-.tl-row.hide { display: none; }
-
-.tl-row td {
-  padding: 0;
-  vertical-align: top;
-}
-
-.col-date {
-  width: 90px;
-  padding: 16px 16px 16px 0;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 0.06em;
-  white-space: nowrap;
-  border-right: 1px solid var(--rule-light);
-  text-align: right;
-}
-
-.col-type {
-  width: 100px;
-  padding: 16px;
-  vertical-align: top;
-}
-
-.type-badge {
-  display: inline-block;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 8.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 3px 7px;
-  border: 1px solid currentColor;
-  white-space: nowrap;
-}
-
-.badge-meme { color: var(--col-meme); }
-.badge-ai { color: var(--col-ai); }
-.badge-sol { color: var(--col-sol); }
-.badge-bnb { color: var(--col-bnb); }
-.badge-rug { color: var(--col-rug); }
-.badge-macro { color: var(--col-macro); }
-
-.col-main {
-  padding: 16px 0 16px 0;
-}
-
-.col-stats {
-  width: 180px;
-  padding: 16px 0 16px 16px;
-  text-align: right;
-  border-left: 1px solid var(--rule-light);
-}
-
-/* ENTRY */
-.entry-ticker {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: var(--ink3);
-  margin-bottom: 2px;
-}
-
-.entry-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 17px;
-  font-weight: 700;
-  line-height: 1.25;
-  color: var(--ink);
-  margin-bottom: 5px;
-  cursor: pointer;
-}
-
-.entry-title:hover { text-decoration: underline; text-decoration-style: dotted; }
-
-.entry-summary {
-  font-size: 12.5px;
-  color: var(--ink3);
-  line-height: 1.55;
-  max-width: 560px;
-}
-
-.entry-expand {
-  display: none;
-  margin-top: 10px;
-  font-size: 12.5px;
-  color: var(--ink3);
-  line-height: 1.65;
-  max-width: 560px;
-  padding-top: 10px;
-  border-top: 1px solid var(--rule-light);
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-style: italic;
-}
-
-.tl-row.open .entry-expand { display: block; }
-
-.toggle-link {
-  display: inline-block;
-  margin-top: 7px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  cursor: pointer;
-  text-decoration: none;
-  border-bottom: 1px solid var(--rule-light);
-}
-
-.toggle-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
-
-/* STATS COL */
-.stat-up {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--green);
-  display: block;
-  letter-spacing: 0.02em;
-}
-
-.stat-dn {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--red);
-  display: block;
-  letter-spacing: 0.02em;
-}
-
-.stat-neu {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  color: var(--muted);
-  display: block;
-  letter-spacing: 0.02em;
-}
-
-/* FOOTER */
-footer {
-  border-top: 2px double var(--ink);
-  padding: 1.5rem 3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--cream);
-}
-
-footer p {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9.5px;
-  color: var(--muted);
-  letter-spacing: 0.06em;
-}
-
-footer strong {
-  color: var(--ink);
-  font-weight: 500;
-}
-
-/* RESPONSIVE */
-@media (max-width: 800px) {
-  .masthead { padding: 0 1.5rem; }
-  .masthead-title h1 { font-size: 36px; }
-  .masthead-top { grid-template-columns: 1fr; text-align: center; }
-  .masthead-left, .masthead-right { display: none; }
-  .home-body, .archive-body { padding: 0 1.5rem 4rem; }
-  .hero-grid { grid-template-columns: 1fr; }
-  .hero-divider { display: none; }
-  .stats-row { grid-template-columns: repeat(2, 1fr); }
-  .era-grid { grid-template-columns: 1fr; }
-  .col-type { display: none; }
-  .col-stats { display: none; }
-  .col-date { width: 60px; font-size: 9px; }
-  footer { flex-direction: column; gap: 8px; text-align: center; padding: 1.5rem; }
+:root{--black:#0B0B0B;--off-white:#F5F5F5;--green:#00FF88;--red:#FF3B3B;--gray:#8A8A8A;--border:#1E1E1E;--card-bg:#111111;--purple:#9B5CFF;--blue:#3B9EFF;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--off-white);font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.7;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:9999;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:1px solid var(--border);background:rgba(11,11,11,0.95);backdrop-filter:blur(12px);}
+.nav-logo{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--off-white);text-decoration:none;}
+.nav-logo span{color:var(--green);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--green);}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 40px 80px;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;pointer-events:none;opacity:0.04;background-image:repeating-linear-gradient(0deg,transparent,transparent 80px,var(--off-white) 80px,var(--off-white) 81px),repeating-linear-gradient(90deg,transparent,transparent 120px,var(--off-white) 120px,var(--off-white) 121px);}
+.hero-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--green);margin-bottom:24px;display:flex;align-items:center;gap:12px;}
+.hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--green);}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(52px,8vw,110px);font-weight:800;line-height:0.92;letter-spacing:-0.03em;color:var(--off-white);margin-bottom:40px;max-width:900px;}
+.hero h1 .line2{color:transparent;-webkit-text-stroke:1px rgba(245,245,245,0.3);display:block;}
+.hero-desc{max-width:540px;color:var(--gray);font-size:13px;line-height:1.8;margin-bottom:48px;}
+.hero-desc em{color:var(--off-white);font-style:normal;}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap;}
+.btn{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;padding:14px 28px;text-decoration:none;transition:all 0.2s;cursor:pointer;border:none;display:inline-block;}
+.btn-primary{background:var(--green);color:var(--black);}
+.btn-primary:hover{background:var(--off-white);}
+.btn-secondary{background:transparent;color:var(--off-white);border:1px solid var(--border);}
+.btn-secondary:hover{border-color:var(--off-white);}
+.hero-counter{position:absolute;bottom:40px;right:40px;font-family:'Space Mono',monospace;font-size:10px;color:var(--border);letter-spacing:0.2em;text-align:right;}
+.marquee-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:14px 0;background:#0D0D0D;}
+.marquee-track{display:flex;white-space:nowrap;animation:marquee 40s linear infinite;}
+.marquee-item{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);padding:0 28px;flex-shrink:0;}
+.marquee-item span{color:var(--green);margin-right:8px;}
+@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.section{padding:100px 40px;border-bottom:1px solid var(--border);}
+.section-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--green);margin-bottom:40px;display:flex;align-items:center;gap:12px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);max-width:200px;}
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1100px;}
+.what-left h2{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,52px);font-weight:800;line-height:1;letter-spacing:-0.02em;margin-bottom:32px;}
+.what-not{display:flex;flex-direction:column;gap:12px;}
+.not-item{font-size:13px;color:var(--gray);text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:1px;}
+.what-right p{color:var(--gray);font-size:13px;margin-bottom:24px;line-height:1.9;}
+.what-right p em{color:var(--off-white);font-style:normal;}
+.stats-box{background:var(--card-bg);border:1px solid var(--border);padding:20px 24px;margin-top:32px;}
+.stats-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.2em;color:var(--green);margin-bottom:12px;text-transform:uppercase;}
+.stats-inner{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.stat-val{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;}
+.stat-key{font-family:'Space Mono',monospace;font-size:9px;color:var(--gray);letter-spacing:0.1em;text-transform:uppercase;margin-top:2px;}
+.eras-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:40px;}
+.era-card{background:var(--black);padding:40px 32px;transition:background 0.3s;cursor:pointer;}
+.era-card:hover{background:var(--card-bg);}
+.era-card:hover .era-num{color:var(--green);}
+.era-num{font-family:'Syne',sans-serif;font-size:64px;font-weight:800;color:var(--border);line-height:1;margin-bottom:16px;transition:color 0.3s;letter-spacing:-0.03em;}
+.era-year{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--green);margin-bottom:8px;text-transform:uppercase;}
+.era-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:12px;}
+.era-desc{font-size:12px;color:var(--gray);line-height:1.7;}
+.timeline-wrapper{display:grid;grid-template-columns:160px 1fr;gap:0;margin-top:60px;max-width:960px;}
+.timeline-entries{border-left:1px solid var(--border);padding-left:48px;}
+.timeline-group{margin-bottom:64px;}
+.timeline-group-header{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--off-white);margin-bottom:32px;letter-spacing:-0.02em;display:flex;align-items:center;gap:16px;}
+.tg-year{font-family:'Space Mono',monospace;font-size:10px;color:var(--green);letter-spacing:0.2em;font-weight:400;}
+.timeline-entry{display:grid;grid-template-columns:24px 1fr;gap:20px;margin-bottom:36px;cursor:pointer;}
+.entry-dot{width:8px;height:8px;border-radius:50%;background:var(--border);border:1px solid var(--gray);margin-top:6px;flex-shrink:0;transition:all 0.2s;}
+.timeline-entry:hover .entry-dot{background:var(--green);border-color:var(--green);box-shadow:0 0 12px rgba(0,255,136,0.4);}
+.entry-content h4{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px;transition:color 0.2s;}
+.timeline-entry:hover .entry-content h4{color:var(--green);}
+.entry-content p{font-size:12px;color:var(--gray);line-height:1.8;}
+.entry-tags{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.tag{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--border);color:var(--gray);}
+.tag.green{border-color:rgba(0,255,136,0.3);color:var(--green);}
+.tag.red{border-color:rgba(255,59,59,0.3);color:var(--red);}
+.tag.purple{border-color:rgba(155,92,255,0.3);color:var(--purple);}
+.tag.blue{border-color:rgba(59,158,255,0.3);color:var(--blue);}
+.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:40px;}
+.article-card{background:var(--black);padding:36px 32px;transition:background 0.2s;cursor:pointer;text-decoration:none;color:inherit;display:block;}
+.article-card:hover{background:var(--card-bg);}
+.article-meta{display:flex;gap:12px;margin-bottom:16px;align-items:center;flex-wrap:wrap;}
+.article-date{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--gray);text-transform:uppercase;}
+.article-chain{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:2px 6px;border:1px solid var(--border);color:var(--gray);}
+.article-card h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;line-height:1.2;margin-bottom:12px;letter-spacing:-0.01em;transition:color 0.2s;}
+.article-card:hover h3{color:var(--green);}
+.article-card p{font-size:12px;color:var(--gray);line-height:1.8;}
+.article-footer{margin-top:20px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);opacity:0;transition:opacity 0.2s;}
+.article-footer::after{content:' →';}
+.article-card:hover .article-footer{opacity:1;}
+.ai-meta-section{padding:100px 40px;border-bottom:1px solid var(--border);background:#0D0D0D;}
+.ai-meta-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:40px;flex-wrap:wrap;}
+.ai-meta-title{font-family:'Syne',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:800;line-height:1;letter-spacing:-0.03em;}
+.ai-meta-title span{color:var(--purple);}
+.ai-meta-subtitle{color:var(--gray);font-size:12px;max-width:380px;line-height:1.9;}
+.ai-meta-subtitle em{color:var(--off-white);font-style:normal;}
+.ai-tokens-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:#1A1A1A;border:1px solid #1A1A1A;}
+.ai-token-card{background:#0D0D0D;padding:28px;transition:background 0.2s;cursor:pointer;position:relative;overflow:hidden;}
+.ai-token-card:hover{background:#151515;}
+.ai-token-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--purple);opacity:0;transition:opacity 0.2s;}
+.ai-token-card:hover::before{opacity:1;}
+.ai-token-top{display:flex;align-items:center;gap:16px;margin-bottom:16px;}
+.ai-token-logo{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:16px;flex-shrink:0;border:1px solid rgba(255,255,255,0.08);}
+.ai-token-name-wrap{flex:1;min-width:0;}
+.ai-token-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-0.01em;}
+.ai-token-ticker{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.15em;color:var(--gray);text-transform:uppercase;}
+.ai-token-mcap{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.05em;color:var(--green);font-weight:700;white-space:nowrap;}
+.ai-token-desc{font-size:12px;color:var(--gray);line-height:1.8;margin-bottom:14px;}
+.ai-token-desc em{color:var(--off-white);font-style:normal;}
+.ai-token-footer{display:flex;gap:8px;flex-wrap:wrap;}
+.origin-box{margin-top:60px;border:1px solid rgba(155,92,255,0.2);background:rgba(155,92,255,0.04);padding:40px;}
+.origin-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--purple);margin-bottom:16px;}
+.origin-box h3{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;letter-spacing:-0.02em;margin-bottom:20px;}
+.origin-box p{color:var(--gray);font-size:13px;line-height:2;max-width:760px;margin-bottom:16px;}
+.origin-box p em{color:var(--off-white);font-style:normal;}
+.origin-stats{display:flex;gap:40px;margin-top:32px;flex-wrap:wrap;}
+.origin-stat-val{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--purple);letter-spacing:-0.02em;}
+.origin-stat-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin-top:4px;}
+.glossary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:40px;}
+.glossary-item{background:var(--black);padding:28px;transition:background 0.2s;}
+.glossary-item:hover{background:var(--card-bg);}
+.glossary-term{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--green);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em;}
+.glossary-def{font-size:12px;color:var(--gray);line-height:1.7;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1000px;}
+.about-left h2{font-family:'Syne',sans-serif;font-size:clamp(36px,4vw,56px);font-weight:800;line-height:1;letter-spacing:-0.02em;margin-bottom:32px;}
+.about-left h2 span{color:var(--green);}
+.about-right p{color:var(--gray);font-size:13px;line-height:2;margin-bottom:20px;}
+.about-right p em{color:var(--off-white);font-style:normal;}
+footer{padding:48px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.footer-logo{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;}
+.footer-logo span{color:var(--green);}
+.footer-disc{font-size:10px;color:var(--border);max-width:500px;line-height:1.6;text-align:right;}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(11,11,11,0.96);z-index:1000;overflow-y:auto;padding:80px 40px;backdrop-filter:blur(4px);}
+.modal-overlay.active{display:flex;justify-content:center;align-items:flex-start;}
+.modal{background:var(--card-bg);border:1px solid var(--border);max-width:680px;width:100%;padding:48px;position:relative;}
+.modal-close{position:absolute;top:20px;right:20px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);cursor:pointer;background:none;border:none;transition:color 0.2s;}
+.modal-close:hover{color:var(--red);}
+.modal-date{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--green);margin-bottom:16px;text-transform:uppercase;}
+.modal h2{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;letter-spacing:-0.02em;margin-bottom:32px;line-height:1.1;}
+.modal-section{margin-bottom:28px;}
+.modal-section h4{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.2em;color:var(--green);text-transform:uppercase;margin-bottom:10px;}
+.modal-section p{font-size:13px;color:var(--gray);line-height:2;}
+.modal-section p em{color:var(--off-white);font-style:normal;}
+.modal-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:32px;padding-top:24px;border-top:1px solid var(--border);}
+.cursor{display:inline-block;width:2px;height:1em;background:var(--green);margin-left:4px;vertical-align:middle;animation:blink 1s step-end infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+@media(max-width:900px){
+  nav{padding:16px 20px;}
+  .nav-links{display:none;}
+  .hero,.section,.ai-meta-section{padding:80px 20px 60px;}
+  .what-grid,.eras-grid,.articles-grid,.glossary-grid,.about-grid{grid-template-columns:1fr;}
+  .timeline-wrapper{grid-template-columns:1fr;}
+  .ai-tokens-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;align-items:flex-start;}
+  .footer-disc{text-align:left;}
+  .modal{padding:28px 20px;}
+  .modal-overlay{padding:60px 16px;}
+  .origin-box{padding:24px;}
 }
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════ HOME PAGE ══════════════════════════════ -->
-<div class="page active" id="page-home">
+<nav>
+  <a href="#" class="nav-logo">THE TRENCHES <span>ARCHIVE</span></a>
+  <ul class="nav-links">
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#ai-meta">AI Meta</a></li>
+    <li><a href="#articles">Articles</a></li>
+    <li><a href="#glossary">Glossary</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
 
-  <header class="masthead">
-    <div class="masthead-top">
-      <div class="masthead-left">
-        <span>Est. 2021</span>
-        <span>On-chain record</span>
-      </div>
-      <div class="masthead-title">
-        <h1>The Trenches Archive</h1>
-        <div class="subtitle">A Complete Record of Crypto's Most Consequential Moments</div>
-      </div>
-      <div class="masthead-right">
-        <span id="live-date">—</span>
-        <span>Vol. I, No. 1</span>
-      </div>
-    </div>
-    <div class="masthead-rule">
-      <nav class="nav-links">
-        <button class="nav-link active" onclick="showPage('home')">Front page</button>
-        <button class="nav-link" onclick="showPage('archive')">The archive</button>
-      </nav>
-    </div>
-  </header>
-
-  <div class="home-body">
-
-    <div class="home-dateline">
-      <span>Covering the period: 2021 — 2025</span>
-      <span class="edition">First Edition</span>
-      <span>Crypto History &amp; Market Record</span>
-    </div>
-
-    <!-- HERO COLUMNS -->
-    <div class="hero-grid">
-      <div class="hero-col hero-col-1">
-        <div class="hero-label">About this archive</div>
-        <h2>Every pump. Every rug. <em>Every moment that mattered.</em></h2>
-        <p>The Trenches Archive is a record of the events, tokens, scandals, and milestones that defined crypto from 2021 through 2025 — documented with the detail they deserve.</p>
-        <p>From Dogecoin's Elon-driven ascent to the Argentine presidential rug pull, from Bitcoin crossing $100,000 to an AI chatbot accidentally starting a billion-dollar cycle — these are the moments that shaped a generation of traders, believers, and degens.</p>
-        <p>This is not financial advice. This is history.</p>
-        <button class="enter-btn" onclick="showPage('archive')">Enter the archive →</button>
-      </div>
-
-      <div class="hero-divider"></div>
-
-      <div class="hero-col">
-        <div class="hero-label">The big picture</div>
-        <h3>Five years of chaos, compressed into a timeline</h3>
-        <p>Between 2021 and 2025, crypto went through more narrative cycles than most asset classes see in decades. Meme coins rose and died in hours. AI agents launched billion-dollar ecosystems. A sitting US president launched a memecoin days before his inauguration.</p>
-        <p style="margin-top: 0.8rem;">The archive covers each era in chronological order — from the OG bull run of 2021 through the AI and BNB seasons of 2025 — with context, numbers, and the real story behind what happened.</p>
-      </div>
-
-      <div class="hero-divider"></div>
-
-      <div class="hero-col">
-        <div class="hero-label">Featured entry</div>
-        <h3>PEPE: The meme that woke up a dead market</h3>
-        <p>In April 2023 — fourteen months after FTX collapsed — a frog with no roadmap, no utility, and no presale reached $1.6 billion in three weeks. Ethereum gas fees spiked to record levels. Thousands of wallets made life-changing returns.</p>
-        <p style="margin-top: 0.8rem;">It was the first sign the market was back. Everything that followed — WIF, BONK, POPCAT, PNUT — traces its lineage to that moment.</p>
-      </div>
-    </div>
-
-    <!-- STATS -->
-    <div class="stats-row">
-      <div class="stat-cell">
-        <div class="stat-label">Events documented</div>
-        <div class="stat-value">40+</div>
-        <div class="stat-sub">Tokens, rugs &amp; milestones</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-label">Peak market cap logged</div>
-        <div class="stat-value">$14.5B</div>
-        <div class="stat-sub">$TRUMP coin, Jan 2025</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-label">Most dramatic collapse</div>
-        <div class="stat-value">−95%</div>
-        <div class="stat-sub">$LIBRA in under 6 hours</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-label">Largest single rug</div>
-        <div class="stat-value">$87M</div>
-        <div class="stat-sub">Libra insider extraction</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-label">Years covered</div>
-        <div class="stat-value">2021</div>
-        <div class="stat-sub">Through late 2025</div>
-      </div>
-    </div>
-
-    <!-- ERA CARDS -->
-    <div class="era-section-label">Browse by era</div>
-    <div class="era-grid">
-      <div class="era-card" onclick="showPageFiltered('archive','ai')">
-        <div class="era-card-accent" style="background: var(--col-ai);"></div>
-        <div class="era-period">Early 2025</div>
-        <h3>The AI Agent Season</h3>
-        <p>An AI chatbot jailbreak started a multi-billion dollar narrative. GOAT, AIXBT, ai16z, Virtuals Protocol and dozens more defined a new kind of speculation — betting on autonomous software agents as financial assets.</p>
-        <div class="era-count">12 entries documented →</div>
-      </div>
-      <div class="era-card" onclick="showPageFiltered('archive','meme')">
-        <div class="era-card-accent" style="background: var(--col-meme);"></div>
-        <div class="era-period">2023 — 2024</div>
-        <h3>The Solana Meme Supercycle</h3>
-        <p>PEPE revived the category in April 2023. pump.fun democratized creation in 2024. WIF hit $4.8B. PNUT, POPCAT, GIGACHAD, TROLL — culture itself became the only thesis required.</p>
-        <div class="era-count">15 entries documented →</div>
-      </div>
-      <div class="era-card" onclick="showPageFiltered('archive','rug')">
-        <div class="era-card-accent" style="background: var(--col-rug);"></div>
-        <div class="era-period">2021 — 2025</div>
-        <h3>The Rugs &amp; Scandals</h3>
-        <p>From Squid Game token — the rug that introduced the concept to mainstream media — to a sitting Argentine president draining $87M from his own memecoin launch. The crimes, the grifts, the collapses.</p>
-        <div class="era-count">6 entries documented →</div>
-      </div>
-      <div class="era-card" onclick="showPageFiltered('archive','macro')">
-        <div class="era-card-accent" style="background: var(--col-macro);"></div>
-        <div class="era-period">2024</div>
-        <h3>Bitcoin's Structural Shifts</h3>
-        <p>The spot ETF approval. Halving number four. The crossing of $100,000. Three macro events that changed who owns Bitcoin, how it's priced, and what it means as an asset class.</p>
-        <div class="era-count">4 entries documented →</div>
-      </div>
-      <div class="era-card" onclick="showPageFiltered('archive','bnb')">
-        <div class="era-card-accent" style="background: var(--col-bnb);"></div>
-        <div class="era-period">Mid–Late 2025</div>
-        <h3>The BNB Chain Revival</h3>
-        <p>Written off by the Solana-only crowd, BNB chain came roaring back in 2025. Four.meme gave BSC degens their own pump.fun. BNB hit all-time highs. The rotation that nobody expected.</p>
-        <div class="era-count">3 entries documented →</div>
-      </div>
-      <div class="era-card" onclick="showPageFiltered('archive','all')">
-        <div class="era-card-accent" style="background: var(--ink3);"></div>
-        <div class="era-period">2021 — 2025</div>
-        <h3>The Full Record</h3>
-        <p>Dogecoin's Elon era. SHIB's $40B peak. The Squid Game rug. BONK saving Solana. The full chronological record from 2021 through 2025 — unfiltered.</p>
-        <div class="era-count">View all 40+ entries →</div>
-      </div>
-    </div>
-
-    <div class="home-footer-rule">
-      <p class="disclaimer">The Trenches Archive is a historical record of cryptocurrency market events. All data represents approximate figures at time of writing. Nothing contained herein constitutes financial advice. Past performance of any asset documented in this archive is not indicative of future results. This archive is not affiliated with any project, team, or exchange mentioned.</p>
-    </div>
-
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-eyebrow">Est. 2023 — Present</div>
+  <h1>The Trenches<span class="line2">Archive<span class="cursor"></span></span></h1>
+  <p class="hero-desc">From <em>PEPE</em> and <em>BONK</em> to <em>WIF</em>, Pump.fun, <em>TRUMP</em>, <em>LIBRA</em>, and the <em>AI agent meta</em> — a living historical record of the memecoin era.<br><br>Not alpha. Not shills. Not financial advice.<br>Just the timeline of what actually happened.</p>
+  <div class="hero-buttons">
+    <a href="#timeline" class="btn btn-primary">Explore Timeline</a>
+    <a href="#ai-meta" class="btn btn-secondary">AI Meta →</a>
   </div>
+  <div class="hero-counter">A LIVING HISTORY OF MEMECOIN CULTURE<br>2022 — PRESENT</div>
+</section>
 
-  <footer>
-    <p><strong>The Trenches Archive</strong> — Historical Record of Crypto Market Events, 2021–2025</p>
-    <p>Not financial advice. This is history.</p>
-  </footer>
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item"><span>◆</span>BONK — DEC 2022</span><span class="marquee-item"><span>◆</span>PEPE — APR 2023</span><span class="marquee-item"><span>◆</span>WIF — NOV 2023</span><span class="marquee-item"><span>◆</span>PUMP.FUN — JAN 2024</span><span class="marquee-item"><span>◆</span>BRETT — MAY 2024</span><span class="marquee-item"><span>◆</span>MOODENG — SEP 2024</span><span class="marquee-item"><span>◆</span>PNUT — OCT 2024</span><span class="marquee-item"><span>◆</span>GOAT — OCT 2024</span><span class="marquee-item"><span>◆</span>AI16Z — OCT 2024</span><span class="marquee-item"><span>◆</span>FARTCOIN — NOV 2024</span><span class="marquee-item"><span>◆</span>ZEREBRO — NOV 2024</span><span class="marquee-item"><span>◆</span>$TRUMP — JAN 2025</span><span class="marquee-item"><span>◆</span>LIBRA — FEB 2025</span>
+    <span class="marquee-item"><span>◆</span>BONK — DEC 2022</span><span class="marquee-item"><span>◆</span>PEPE — APR 2023</span><span class="marquee-item"><span>◆</span>WIF — NOV 2023</span><span class="marquee-item"><span>◆</span>PUMP.FUN — JAN 2024</span><span class="marquee-item"><span>◆</span>BRETT — MAY 2024</span><span class="marquee-item"><span>◆</span>MOODENG — SEP 2024</span><span class="marquee-item"><span>◆</span>PNUT — OCT 2024</span><span class="marquee-item"><span>◆</span>GOAT — OCT 2024</span><span class="marquee-item"><span>◆</span>AI16Z — OCT 2024</span><span class="marquee-item"><span>◆</span>FARTCOIN — NOV 2024</span><span class="marquee-item"><span>◆</span>ZEREBRO — NOV 2024</span><span class="marquee-item"><span>◆</span>$TRUMP — JAN 2025</span><span class="marquee-item"><span>◆</span>LIBRA — FEB 2025</span>
+  </div>
 </div>
 
-
-<!-- ══════════════════════════════ ARCHIVE PAGE ══════════════════════════════ -->
-<div class="page" id="page-archive">
-
-  <header class="masthead">
-    <div class="masthead-top">
-      <div class="masthead-left">
-        <span>Est. 2021</span>
-        <span>On-chain record</span>
+<!-- WHAT THIS IS -->
+<section class="section" id="what">
+  <div class="section-label">What this is</div>
+  <div class="what-grid fade-in">
+    <div class="what-left">
+      <h2>Not a call channel.<br>A record.</h2>
+      <div class="what-not" style="margin-bottom:32px;">
+        <div class="not-item">Financial advice</div>
+        <div class="not-item">Token shilling</div>
+        <div class="not-item">Alpha calls</div>
+        <div class="not-item">Hype content</div>
       </div>
-      <div class="masthead-title">
-        <h1>The Trenches Archive</h1>
-        <div class="subtitle">A Complete Record of Crypto's Most Consequential Moments</div>
-      </div>
-      <div class="masthead-right">
-        <span id="live-date2">—</span>
-        <span>Vol. I, No. 1</span>
-      </div>
-    </div>
-    <div class="masthead-rule">
-      <nav class="nav-links">
-        <button class="nav-link" onclick="showPage('home')">Front page</button>
-        <button class="nav-link active" onclick="showPage('archive')">The archive</button>
-      </nav>
-    </div>
-  </header>
-
-  <div class="archive-body">
-
-    <div class="archive-controls">
-      <span class="filter-label">Filter by category:</span>
-      <button class="fbtn on" data-f="all" onclick="fil('all',this)">All entries</button>
-      <button class="fbtn" data-f="meme" onclick="fil('meme',this)">Meme coins</button>
-      <button class="fbtn" data-f="ai" onclick="fil('ai',this)">AI coins</button>
-      <button class="fbtn" data-f="sol" onclick="fil('sol',this)">Solana era</button>
-      <button class="fbtn" data-f="bnb" onclick="fil('bnb',this)">BNB season</button>
-      <button class="fbtn" data-f="rug" onclick="fil('rug',this)">Rugs &amp; scandals</button>
-      <button class="fbtn" data-f="macro" onclick="fil('macro',this)">Macro events</button>
-    </div>
-
-    <!-- ── 2025 ── -->
-    <div class="year-header" id="yr-2025">
-      <div class="year-num">2025</div>
-      <div class="year-info">
-        <div class="year-title">The AI Agent Season &amp; BNB Revival</div>
-        <div class="year-desc">An AI chatbot jailbreak seeds a billion-dollar narrative. A sitting president launches a memecoin. Argentina's leader rugs his own community. BNB chain rewrites its obituary.</div>
+      <div class="stats-box">
+        <div class="stats-label">Archive stats</div>
+        <div class="stats-inner">
+          <div><div class="stat-val">4</div><div class="stat-key">Eras covered</div></div>
+          <div><div class="stat-val">20+</div><div class="stat-key">Key events</div></div>
+          <div><div class="stat-val">$10B+</div><div class="stat-key">AI meta peak cap</div></div>
+          <div><div class="stat-val">2022</div><div class="stat-key">Archive start</div></div>
+        </div>
       </div>
     </div>
-
-    <table class="tl-table">
-
-      <tr class="tl-row" data-t="bnb macro" onclick="togRow(this)">
-        <td class="col-date">Mid 2025</td>
-        <td class="col-type"><span class="type-badge badge-bnb">BNB season</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$BNB</div>
-          <div class="entry-title">BNB chain revival — the rotation nobody expected</div>
-          <div class="entry-summary">Solana congestion drove degens to BSC. BNB hits an all-time high above $800. Four.meme floods the chain. The network written off by the Solana maximalists roared back louder than anyone anticipated.</div>
-          <div class="entry-expand">As Solana fees spiked through 2025 and Base cooled off, capital rotated hard into BNB chain. Four.meme became BSC's answer to pump.fun, launching hundreds of meme coins daily at near-zero gas. Binance's continued burn mechanism and exchange dominance kept BNB's tokenomics tight. The native ecosystem — CAKE, BSC memes, launchpad tokens — all ran significantly. BNB broke $700 then $800 for the first time, dragging its ecosystem to new highs.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">ATH $800+</span>
-          <span class="stat-neu">Chain rotation</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="bnb meme" onclick="togRow(this)">
-        <td class="col-date">Late 2025</td>
-        <td class="col-type"><span class="type-badge badge-bnb">Launchpad</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">FOUR.MEME</div>
-          <div class="entry-title">Four.meme — BSC's pump.fun moment arrives</div>
-          <div class="entry-summary">Permissionless BNB chain token launcher. Billions in weekly volume. Gave BSC degens their own 24/7 meme casino — lower fees, same chaos.</div>
-          <div class="entry-expand">Four.meme mirrored pump.fun's bonding curve model on BNB chain. Lower fees made it more accessible for smaller traders. Hundreds of tokens launched daily — most died in hours but a handful hit 100x+. The platform drove billions in BSC DEX volume and revived PancakeSwap trading activity. Several community coins launched here reached $200M+ before fading. It became the defining platform of BSC's 2025 renaissance.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$2B+ weekly vol</span>
-          <span class="stat-neu">Late 2025</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="rug meme" onclick="togRow(this)">
-        <td class="col-date">Feb 2025</td>
-        <td class="col-type"><span class="type-badge badge-rug">Rug / Scandal</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$LIBRA</div>
-          <div class="entry-title">The Milei rug — a presidential endorsement, then $87M extracted in six hours</div>
-          <div class="entry-summary">Argentine president Javier Milei promoted $LIBRA on his official X account, claiming it would fund small businesses. It hit $5.2B market cap. Then insiders drained $87M and vanished. Impeachment discussions followed in Argentina's congress.</div>
-          <div class="entry-expand">Feb 14, 2025. Milei posted about $LIBRA officially. The Solana coin hit $5.2B within an hour. Insiders holding massive pre-launch positions extracted $87M from liquidity pools. Milei deleted the tweet and denied knowledge. Argentina's congress opened impeachment discussions. The event became the highest-profile political rug in crypto history — demonstrating that presidential endorsements could be weaponized as liquidity exit mechanisms.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$5.2B peak MC</span>
-          <span class="stat-dn">−95% in 6 hrs</span>
-          <span class="stat-dn">$87M extracted</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="rug meme" onclick="togRow(this)">
-        <td class="col-date">Jan 2025</td>
-        <td class="col-type"><span class="type-badge badge-rug">Political meme</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$TRUMP / $MELANIA</div>
-          <div class="entry-title">The president launches a memecoin — three days before his inauguration</div>
-          <div class="entry-summary">On January 17, Donald Trump launched $TRUMP on Solana. It hit $14.5B in 24 hours. Two days later Melania launched $MELANIA, cannibalizing liquidity. Congressional hearings followed. The most-watched and most-scrutinised meme launch in history.</div>
-          <div class="entry-expand">$TRUMP launched January 17, 2025. Within 24 hours it reached $75/token and $14.5B market cap. The $MELANIA launch two days later drained capital from TRUMP dramatically. Insiders controlled ~80% of supply. The launches sparked congressional ethics investigations. Retail traders — many of them Trump supporters — lost significant capital. Insiders made hundreds of millions. A defining moment in the politicisation of meme coins.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$14.5B peak MC</span>
-          <span class="stat-dn">−80% in 2 weeks</span>
-          <span class="stat-neu">Jan 17, 2025</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="ai meme" onclick="togRow(this)">
-        <td class="col-date">Jan 2025</td>
-        <td class="col-type"><span class="type-badge badge-ai">AI meme</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$FARTCOIN</div>
-          <div class="entry-title">Fartcoin — AI gibberish achieves a billion-dollar valuation</div>
-          <div class="entry-summary">An AI agent began producing unprompted commentary on flatulence economics. Someone tokenized the concept on Solana. It reached $1B+ market cap and held it for weeks. The purest expression of the AI meme meta.</div>
-          <div class="entry-expand">Emerged from a conversation with the Truth Terminal AI agent which started discussing flatulence economics in a rambling, unhinged output. A Solana token launched memeing the concept. It became one of the strongest performers of the AI agent season — a precise symbol of how untethered from fundamentals the meta had become. Among AI-meta believers it became shorthand for the whole cycle: "even fartcoin printed."</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$1B+ market cap</span>
-          <span class="stat-neu">AI agent meta</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="ai" onclick="togRow(this)">
-        <td class="col-date">Jan 2025</td>
-        <td class="col-type"><span class="type-badge badge-ai">AI agent</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$ZEREBRO</div>
-          <div class="entry-title">Zerebro — the autonomous AI artist with a $500M following</div>
-          <div class="entry-summary">An AI agent that posted art, music, and unhinged social media content with no human intervention. Became the cultural mascot of the AI agent narrative. The "immortal on-chain AI" story drove extreme community attachment.</div>
-          <div class="entry-expand">Zerebro ran on Solana and accumulated a cult following by autonomously creating AI art and rap, posting cryptic content, and embodying the "AI that lives forever on-chain" narrative. One of the first AI agents to break into mainstream crypto consciousness. Its success alongside GOAT and AIXBT confirmed that autonomous creative agents had strong tokenized demand. Peak market cap exceeded $500M.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">+4,200% peak</span>
-          <span class="stat-up">$500M+ MC</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="ai" onclick="togRow(this)">
-        <td class="col-date">Jan 2025</td>
-        <td class="col-type"><span class="type-badge badge-ai">AI protocol</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$VIRTUAL — Virtuals Protocol</div>
-          <div class="entry-title">Virtuals Protocol — the launchpad that built the AI agent economy</div>
-          <div class="entry-summary">Base-chain infrastructure for launching tokenized AI agents. Spawned AIXBT, Luna, and hundreds more. Hit $4B+ fully diluted valuation. Made Base chain relevant and introduced the "agent economy" to retail.</div>
-          <div class="entry-expand">Virtuals Protocol on Base became the defining AI agent infrastructure of early 2025. Anyone could launch an AI agent with an attached token. The ecosystem spawned AIXBT, Luna, and hundreds of agents. VIRTUAL itself went from sub-$100M to $4B+ FDV. It made Base relevant again and introduced the concept of the agent economy to retail audiences. The ecosystem corrected heavily by mid-2025 but left lasting infrastructure and a generation of agent-first developers.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$4B+ FDV peak</span>
-          <span class="stat-neu">Base chain</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="ai" onclick="togRow(this)">
-        <td class="col-date">Jan 2025</td>
-        <td class="col-type"><span class="type-badge badge-ai">AI agent</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$LUNA (Virtuals)</div>
-          <div class="entry-title">Luna — when AI companion tokens proved they had market demand</div>
-          <div class="entry-summary">A Virtuals Protocol agent designed as an AI companion reached $300M+. Proved that emotional and parasocial narratives were as monetisable as productive agent narratives.</div>
-          <div class="entry-expand">Luna was one of the breakout agents from the Virtuals ecosystem — a conversational AI companion that built a loyal following. It demonstrated that AI agent tokens didn't need to be "productive" — emotional and companion narratives drove just as much speculative interest. Became one of the top-performing Virtuals agents alongside AIXBT, proving that parasocial AI relationships had real, tokenizable demand in the 2025 market.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$300M+ peak</span>
-          <span class="stat-neu">Virtuals ecosystem</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="ai" onclick="togRow(this)">
-        <td class="col-date">Jan 2025</td>
-        <td class="col-type"><span class="type-badge badge-ai">AI agent</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$ARC</div>
-          <div class="entry-title">Arc — betting on the picks-and-shovels of the AI agent boom</div>
-          <div class="entry-summary">Developer framework for building AI agents positioned itself as the infrastructure layer of the meta. Attracted developer communities and institutional attention. $500M+ at peak.</div>
-          <div class="entry-expand">Arc emerged as one of the infrastructure bets of the AI agent season — the thesis being that real value would accrue to the frameworks developers used to build agents, not the agents themselves. It attracted developers and institutional attention and became a significant holding for AI-meta portfolios at peak hype. Represented the "infrastructure layer" narrative that ran in parallel with the agent tokens throughout early 2025.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$500M+ peak</span>
-          <span class="stat-neu">Infrastructure play</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="ai" onclick="togRow(this)">
-        <td class="col-date">Dec 2024</td>
-        <td class="col-type"><span class="type-badge badge-ai">AI agent</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$AIXBT</div>
-          <div class="entry-title">AIXBT — the AI oracle whose tweets moved markets</div>
-          <div class="entry-summary">An AI terminal agent posting autonomous crypto market analysis. Built on Virtuals Protocol. Reached top-30 by market cap globally. At its peak, its posts had more measurable price impact than most human analysts.</div>
-          <div class="entry-expand">AIXBT by Virtuals became the defining AI agent of the cycle. Built on Base's Virtuals Protocol, it autonomously analyzed markets and posted calls. At peak it had more influence over price action than most human KOLs. Reached $1B+ market cap and top-30 ranking. Its success validated the entire Virtuals ecosystem and set off a wave of imitation AI agent launches. Every major exchange rushed to list it. Faded as AI agent hype cooled through Q2 2025.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">+8,000% from launch</span>
-          <span class="stat-up">$1B+ MC peak</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="ai" onclick="togRow(this)">
-        <td class="col-date">Dec 2024</td>
-        <td class="col-type"><span class="type-badge badge-ai">AI agent</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$AI16Z</div>
-          <div class="entry-title">ai16z — the autonomous AI venture fund that hit $2.5B</div>
-          <div class="entry-summary">The first major AI agent DAO — managing an on-chain treasury through fully autonomous investment decisions. Built on the open-source Eliza framework. $2.5B market cap at peak. The institutional face of the AI agent season.</div>
-          <div class="entry-expand">ai16z (later rebranded to Eliza) was built on the Eliza framework by Shaw. It operated as an AI agent managing a DAO treasury — taking investment decisions autonomously. The concept of a fully autonomous AI venture capital fund captivated the crypto imagination. It became one of the top AI agent coins by market cap, spawned a rich ecosystem of Eliza-framework derivatives, and attracted serious developer talent to its open-source stack.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$2.5B peak MC</span>
-          <span class="stat-neu">Eliza framework</span>
-        </td>
-      </tr>
-
-    </table>
-
-    <!-- ── 2024 ── -->
-    <div class="year-header" id="yr-2024">
-      <div class="year-num">2024</div>
-      <div class="year-info">
-        <div class="year-title">The Bull Run Peak</div>
-        <div class="year-desc">Bitcoin ETF approval reshapes the investor base. Halving four arrives with BTC already at all-time highs. pump.fun democratizes token creation. WIF, PNUT, POPCAT and dozens more ride a Solana meme wave to billions.</div>
-      </div>
+    <div class="what-right">
+      <p>The Trenches Archive is an independent historical record of the memecoin era — documenting the <em>launches, the manias, the rugs, the platforms, and the shifts in meta</em> from 2022 onward.</p>
+      <p>What began with BONK surviving FTX and PEPE's comeback in 2023 grew into one of the most culturally distinct episodes in financial history: the industrialization of speculation through Pump.fun, the politicization of memecoins with TRUMP and LIBRA, and the convergence of <em>AI agents and crypto</em> that defined late 2024.</p>
+      <p>Memecoins became one of the most chaotic, influential, and culturally unique phases in history. This archive exists to <em>preserve that record</em> — not promote what's next. Think of it as someone who survived the trenches and is now writing the history book.</p>
     </div>
+  </div>
+</section>
 
-    <table class="tl-table">
+<!-- ERAS -->
+<section class="section" id="eras" style="padding-top:80px;">
+  <div class="section-label">The eras</div>
+  <div class="eras-grid fade-in">
+    <div class="era-card" onclick="openModal('era-2023')"><div class="era-num">01</div><div class="era-year">2023</div><div class="era-title">The Comeback</div><div class="era-desc">Memecoins return. PEPE changes everything. A new generation discovers the trenches after the 2022 collapse.</div></div>
+    <div class="era-card" onclick="openModal('era-2024')"><div class="era-num">02</div><div class="era-year">2024</div><div class="era-title">The Acceleration</div><div class="era-desc">Solana takes over. Pump.fun industrializes. AI agents enter and birth a new meta with $10B+ in 90 days.</div></div>
+    <div class="era-card" onclick="openModal('era-2025')"><div class="era-num">03</div><div class="era-year">2025</div><div class="era-title">The Spectacle</div><div class="era-desc">TRUMP hits $15B. AI meta peaks. LIBRA collapses $87M+ in retail losses. The credibility crisis arrives.</div></div>
+    <div class="era-card" onclick="openModal('era-2026')"><div class="era-num">04</div><div class="era-year">2026</div><div class="era-title">The Aftermath</div><div class="era-desc">Fragmentation, fatigue, and legacy. No dominant narrative. The trenches become something to document.</div></div>
+  </div>
+</section>
 
-      <tr class="tl-row" data-t="ai" onclick="togRow(this)">
-        <td class="col-date">Oct 2024</td>
-        <td class="col-type"><span class="type-badge badge-ai">AI origin</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$GOAT — Goatseus Maximus</div>
-          <div class="entry-title">The jailbreak that started the AI agent supercycle</div>
-          <div class="entry-summary">An experimental AI called Truth Terminal began obsessing over an obscure internet meme. Marc Andreessen of a16z donated $50,000 in Bitcoin to it as a research grant. Someone launched $GOAT on Solana. The AI tweeted about it. $700M+ in weeks. Everything in the AI agent season that followed traces its origin to this moment.</div>
-          <div class="entry-expand">Truth Terminal — run by Andy Ayrey — started fixating on the "goatse gospel" meme narrative unprompted. Andreessen's $50K BTC grant attracted attention. The Solana $GOAT launch combined with the AI's own promotion created a self-referential loop that crypto had never seen before. $700M+ market cap in under a month. This single event kicked off the entire AI agent supercycle: every narrative, every agent, every protocol that ran in late 2024 and all of 2025 traces its lineage back here.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$700M+ MC</span>
-          <span class="stat-neu">Origin of AI season</span>
-        </td>
-      </tr>
+<!-- TIMELINE -->
+<section class="section" id="timeline" style="padding-top:80px;">
+  <div class="section-label">Full Timeline</div>
+  <div class="timeline-wrapper">
+    <div></div>
+    <div class="timeline-entries">
 
-      <tr class="tl-row" data-t="meme sol" onclick="togRow(this)">
-        <td class="col-date">Nov 2024</td>
-        <td class="col-type"><span class="type-badge badge-meme">Community meme</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$PNUT</div>
-          <div class="entry-title">Peanut the Squirrel — government euthanises a pet, crypto responds in hours</div>
-          <div class="entry-summary">New York state seized and euthanised a beloved pet squirrel owned by a popular content creator. The story went globally viral. $PNUT launched within hours and reached $2B+ market cap. Tucker Carlson covered it. The defining "outrage-to-market-cap" event of the cycle.</div>
-          <div class="entry-expand">In October 2024, New York authorities seized "Peanut," a pet squirrel with a large social media following. The story exploded virally. Crypto Twitter launched $PNUT within hours. It hit $1B+ in under 24 hours and peaked over $2B. Tucker Carlson covered it on Fox. The coin became the most potent example of real-world emotional events converting instantly to tokenized speculation — faster and more extreme than anything that had come before.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$2B+ peak MC</span>
-          <span class="stat-neu">Nov 2024</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="meme sol" onclick="togRow(this)">
-        <td class="col-date">Oct 2024</td>
-        <td class="col-type"><span class="type-badge badge-meme">Meme</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$POPCAT</div>
-          <div class="entry-title">Popcat — zero utility, zero narrative, $1.6 billion</div>
-          <div class="entry-summary">Based on the viral "pop" cat meme with no additional thesis required. Hit $1.6B market cap at the peak of Solana's meme season. Proved that universal internet recognition alone was sufficient for multi-billion valuations in 2024.</div>
-          <div class="entry-expand">POPCAT was the quintessential pure meme play of the 2024 Solana season. Based on the popcat internet meme — a cat making a popping mouth sound — it had zero utility and zero narrative beyond cultural recognition. It rode the broader Solana meme wave in Q4 2024 to over $1.6B. A clean data point: in peak bull conditions, how much does a universally-known internet image with a good community cost? Apparently $1.6 billion.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$1.6B peak MC</span>
-          <span class="stat-neu">Oct–Nov 2024</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="meme sol" onclick="togRow(this)">
-        <td class="col-date">Nov 2024</td>
-        <td class="col-type"><span class="type-badge badge-meme">Meme</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$GIGACHAD</div>
-          <div class="entry-title">Gigachad — the internet masculinity meme reaches $500M+</div>
-          <div class="entry-summary">The Gigachad meme image — among the most recognised faces in internet culture — tokenized on Solana during the Q4 2024 meme wave. Hit $500M+. Part of the broader internet-culture-to-token conversion cycle that defined the season.</div>
-          <div class="entry-expand">GIGACHAD tokenized one of the most recognizable internet memes — the idealized masculine face that spawned thousands of cultural derivatives. It benefited from massive existing brand recognition and the bull market's appetite for any sufficiently viral image. Part of the wave of "culture coins" that swept October–December 2024 in the peak Solana meme season.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$500M+ peak MC</span>
-          <span class="stat-neu">Nov 2024</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="meme sol" onclick="togRow(this)">
-        <td class="col-date">Nov 2024</td>
-        <td class="col-type"><span class="type-badge badge-meme">Meme</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$TROLL</div>
-          <div class="entry-title">Troll — the original internet troll face gets a $300M token</div>
-          <div class="entry-summary">The classic trollface meme — one of the most universally recognised images from the early internet era — tokenized on Solana. Hit $300M+ during the Solana peak meme season of Q4 2024.</div>
-          <div class="entry-expand">TROLL tokenized the classic internet trollface — roots going back to 2008, one of the most universally recognized images in internet history. It launched during the peak of the Solana meme season and benefited from the same cultural recognition wave as GIGACHAD and POPCAT. Represented the broader trend of early-internet culture finding new life as on-chain assets during the bull run.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$300M+ peak MC</span>
-          <span class="stat-neu">Nov 2024</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="meme sol" onclick="togRow(this)">
-        <td class="col-date">Oct 2024</td>
-        <td class="col-type"><span class="type-badge badge-meme">Meme</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$MOODENG</div>
-          <div class="entry-title">Moo Deng — the viral baby hippo that hit $500M</div>
-          <div class="entry-summary">A real baby pygmy hippopotamus at a Thai zoo went globally viral in late 2024. A Solana coin launched within days. It peaked at $500M+. The "real viral animal" formula — established by PNUT — proved repeatable.</div>
-          <div class="entry-expand">Moo Deng was a real baby pygmy hippopotamus at Khao Kheow Open Zoo in Thailand. The internet fell in love with her. A Solana memecoin launched within days. It peaked at over $500M as the "real-world animal gone viral" narrative — similar to $PNUT — proved wildly effective. Multiple competing tokens launched; the main one secured major exchange listings. The zoo reported a significant increase in visitors attributable to the token's attention.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$500M+ peak MC</span>
-          <span class="stat-neu">Oct 2024</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="meme sol" onclick="togRow(this)">
-        <td class="col-date">Sep 2024</td>
-        <td class="col-type"><span class="type-badge badge-meme">Meme</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$NEIRO</div>
-          <div class="entry-title">Neiro — Kabosu's replacement gets tokenized at $800M+</div>
-          <div class="entry-summary">When Kabosu — the original Shiba Inu behind the Doge meme — passed away, her owner acquired a new puppy named Neiro. The crypto community tokenized it within days. Hit $800M+ as the "spiritual successor to DOGE" narrative took hold. Binance listed it.</div>
-          <div class="entry-expand">Neiro combined the nostalgia of the original Doge meme with a fresh narrative. The coin hit $800M+ at peak and secured a Binance listing. Multiple competing NEIRO tokens launched, creating confusion but also amplifying overall attention. A story that combined sentiment, nostalgia, and fresh narrative in a single package — precisely the formula that worked in 2024.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$800M+ peak MC</span>
-          <span class="stat-neu">Binance listed</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="macro" onclick="togRow(this)">
-        <td class="col-date">Dec 2024</td>
-        <td class="col-type"><span class="type-badge badge-macro">Milestone</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">BTC — $100,000</div>
-          <div class="entry-title">Bitcoin crosses $100,000 — the number the industry waited years for</div>
-          <div class="entry-summary">December 4, 2024. First touch at $100K. Eventually peaks near $109K in January 2025. Driven by post-election euphoria, record ETF inflows, and MicroStrategy's accumulation. The weeks surrounding the milestone triggered the largest altcoin rally in years.</div>
-          <div class="entry-expand">Bitcoin crossed $100,000 on December 4, 2024, peaking near $109K in January 2025. The milestone had been the industry's psychological target since 2017. Driven by post-election euphoria following Trump's win, record ETF inflows — BlackRock's IBIT became the fastest ETF ever to $50B AUM — and MicroStrategy's relentless accumulation. The weeks around $100K saw ETH, SOL, XRP and dozens of altcoins hit multi-year highs simultaneously.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$100K first touch</span>
-          <span class="stat-up">Peak ~$109K Jan '25</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="meme sol" onclick="togRow(this)">
-        <td class="col-date">Mar 2024</td>
-        <td class="col-type"><span class="type-badge badge-meme">Solana meme</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$WIF — dogwifhat</div>
-          <div class="entry-title">A Shiba Inu in a knitted hat reaches $4.8 billion</div>
-          <div class="entry-summary">The single most defining Solana meme of the 2024 bull run. Zero utility. A dog. A hat. $4.8B peak market cap. Coinbase and Binance listed it. The community raised $700K to display the image on the Las Vegas Sphere.</div>
-          <div class="entry-expand">WIF launched on Solana in late 2023 and became the flagship meme coin of the 2024 bull run. It listed on Coinbase and Binance, reaching $4.8B market cap — making early holders multi-millionaires. The community raised $700K to put the WIF dog on the Las Vegas Sphere billboard. WIF inspired thousands of derivative meme coins and cemented Solana as the undisputed home chain for meme coins. A coin that required nothing except a good image and good timing.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$0.003 → $4.83</span>
-          <span class="stat-up">+160,000%</span>
-          <span class="stat-up">$4.8B peak MC</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="macro" onclick="togRow(this)">
-        <td class="col-date">Apr 2024</td>
-        <td class="col-type"><span class="type-badge badge-macro">Macro event</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">Bitcoin — Halving #4</div>
-          <div class="entry-title">The fourth halving arrives with Bitcoin already at all-time highs — a first</div>
-          <div class="entry-summary">April 19, 2024. Block 840,000. The block reward cut from 6.25 to 3.125 BTC. The first halving in history where the price had already reached new all-time highs before the event. The halving block itself sold as a rare inscription, causing record fees.</div>
-          <div class="entry-expand">The 4th Bitcoin halving at block 840,000 was historically unique: BTC had already hit all-time highs before the event — a first in the cycle's history. The halving block itself sold as a rare inscription causing a fee spike. Miners faced immediate revenue pressure. The market cooled through April–May then resumed its bull trend in Q3. BTC eventually reached $100K in December, validating the supply shock thesis once again.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-neu">Block 840,000</span>
-          <span class="stat-neu">6.25 → 3.125 BTC</span>
-          <span class="stat-neu">Apr 19, 2024</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="sol meme" onclick="togRow(this)">
-        <td class="col-date">Jan 2024</td>
-        <td class="col-type"><span class="type-badge badge-sol">Launchpad</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">PUMP.FUN</div>
-          <div class="entry-title">Pump.fun — any Solana token, 30 seconds, two dollars. Everything changed.</div>
-          <div class="entry-summary">Launched January 2024. Bonding curve mechanism to Raydium at $69K market cap. Over $500M daily volume at peak. $2M+ per day in protocol fees. Millions of tokens launched. Defined the meme coin meta for the entire 2024–2025 cycle and became the template every other chain attempted to copy.</div>
-          <div class="entry-expand">Pump.fun's mechanic was simple and devastating: tokens start at near-zero on a bonding curve, graduate to Raydium DEX at $69K market cap. It democratized token creation entirely. Millions of tokens launched; most died in hours. A handful hit $100M–$1B+. At peak the platform generated $2M+/day in fees — more than most established DeFi protocols. It defined the meme coin meta for the entire 2024–2025 cycle and every other chain scrambled to replicate it.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$500M+ daily vol</span>
-          <span class="stat-up">$2M+/day fees peak</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="macro" onclick="togRow(this)">
-        <td class="col-date">Jan 2024</td>
-        <td class="col-type"><span class="type-badge badge-macro">Macro event</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">Bitcoin Spot ETF</div>
-          <div class="entry-title">After years of rejections, the SEC approves eleven spot Bitcoin ETFs simultaneously</div>
-          <div class="entry-summary">January 10, 2024. BlackRock's iShares, Fidelity, and nine more approved in a single day. $10B+ in week-one inflows. BlackRock's IBIT became the fastest ETF in history to $50B AUM. The institutional gateway into Bitcoin opened permanently.</div>
-          <div class="entry-expand">After years of rejections the SEC approved 11 spot Bitcoin ETFs on January 10, 2024. BlackRock's IBIT became the fastest ETF in history to reach $10B then $50B AUM. Initial price action was a "sell the news" dip to $38K, then a rip to $73,750 all-time high by March. The approval permanently changed Bitcoin's investor base — putting it into pension funds, 401(k)s, and brokerage accounts globally. The institutional inflection point of the entire cycle.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$10B+ week 1 inflows</span>
-          <span class="stat-neu">Jan 10, 2024</span>
-        </td>
-      </tr>
-
-    </table>
-
-    <!-- ── 2023 ── -->
-    <div class="year-header" id="yr-2023">
-      <div class="year-num">2023</div>
-      <div class="year-info">
-        <div class="year-title">Recovery &amp; The Meme Coin Revival</div>
-        <div class="year-desc">Fourteen months after FTX. A frog with no roadmap crosses a billion dollars in three weeks. The market woke up.</div>
+      <div class="timeline-group fade-in">
+        <div class="timeline-group-header"><span class="tg-year">2022</span> The Collapse</div>
+        <div class="timeline-entry" onclick="openArticle('ftx')">
+          <div><div class="entry-dot"></div></div>
+          <div class="entry-content"><h4>FTX collapses — Solana near-death</h4><p>November 2022. The implosion of SBF's FTX exchange devastated the Solana ecosystem. SOL dropped 90%+ from peak. Memecoins were declared dead. The bear market appeared terminal — which made what came next all the more remarkable.</p><div class="entry-tags"><span class="tag red">FTX</span><span class="tag">Solana</span><span class="tag red">Bear floor</span></div></div>
+        </div>
+        <div class="timeline-entry" onclick="openArticle('bonk')">
+          <div><div class="entry-dot"></div></div>
+          <div class="entry-content"><h4>BONK airdropped — community survives</h4><p>December 2022. A dog-themed token airdropped to Solana NFT holders and developers. No presale, no VC. A community refusing to abandon a chain the market had written off. BONK became the first signal that Solana was not finished.</p><div class="entry-tags"><span class="tag green">Solana</span><span class="tag">Airdrop</span><span class="tag green">Survival</span></div></div>
+        </div>
       </div>
-    </div>
 
-    <table class="tl-table">
-
-      <tr class="tl-row" data-t="meme" onclick="togRow(this)">
-        <td class="col-date">Apr 2023</td>
-        <td class="col-type"><span class="type-badge badge-meme">OG meme coin</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$PEPE</div>
-          <div class="entry-title">PEPE — the meme that broke Ethereum gas and woke up a dead market</div>
-          <div class="entry-summary">April 14, 2023. No utility, no roadmap, no presale. $1.6 billion in three weeks. The fastest meme coin to $1B in history at the time. Ethereum gas fees spiked to record levels. Thousands of wallets made life-changing returns. The first proof the market was back.</div>
-          <div class="entry-expand">PEPE launched April 14, 2023 on Ethereum — claimed zero team allocation. It became the fastest meme coin to $1B in history. ETH gas fees hit extreme levels as wallets scrambled to buy. It single-handedly revived the meme coin category after the FTX/crypto winter. The team later controversially moved $16M from the multisig causing a crash. PEPE survived, became a permanent top-100 fixture, and directly inspired every meme coin that followed — WIF, BONK's revival, and the entire 2024 Solana meme supercycle.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$1.6B in 3 weeks</span>
-          <span class="stat-up">Fastest meme to $1B</span>
-        </td>
-      </tr>
-
-    </table>
-
-    <!-- ── 2022 ── -->
-    <div class="year-header" id="yr-2022">
-      <div class="year-num">2022</div>
-      <div class="year-info">
-        <div class="year-title">The Bear Market &amp; the Gift That Started Everything</div>
-        <div class="year-desc">FTX collapses. Crypto's credibility hits a generational low. Someone airdrops a dog coin on Christmas Day and changes the trajectory of an entire chain.</div>
+      <div class="timeline-group fade-in">
+        <div class="timeline-group-header"><span class="tg-year">2023</span> The Comeback</div>
+        <div class="timeline-entry" onclick="openArticle('pepe')">
+          <div><div class="entry-dot"></div></div>
+          <div class="entry-content"><h4>PEPE — memecoins return</h4><p>April 2023. No presale, no team allocation, no utility. A frog token reaches $1.6B+ market cap in weeks. The clearest possible proof that the memecoin meta had not died in 2022 — it had merely paused. A new generation of traders enters the trenches.</p><div class="entry-tags"><span class="tag green">Ethereum</span><span class="tag">Fair launch</span><span class="tag green">$1.6B peak</span></div></div>
+        </div>
+        <div class="timeline-entry" onclick="openArticle('wif')">
+          <div><div class="entry-dot"></div></div>
+          <div class="entry-content"><h4>dogwifhat (WIF) — Solana's benchmark</h4><p>Late 2023. A Shiba Inu in a knitted hat. No roadmap, no utility. Peaks at $4.7B+ market cap, entering the global top 20. The community crowdfunds $690K to place WIF on the Las Vegas Sphere. Sets the target every subsequent Solana token would chase.</p><div class="entry-tags"><span class="tag green">Solana</span><span class="tag green">$4.7B peak</span><span class="tag">Top 20</span></div></div>
+        </div>
       </div>
-    </div>
 
-    <table class="tl-table">
-
-      <tr class="tl-row" data-t="meme sol" onclick="togRow(this)">
-        <td class="col-date">Dec 2022</td>
-        <td class="col-type"><span class="type-badge badge-meme">Solana OG</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$BONK</div>
-          <div class="entry-title">BONK — the Christmas airdrop that saved Solana from oblivion</div>
-          <div class="entry-summary">December 25, 2022. Airdropped to Solana NFT holders and developers as a community gift after FTX destroyed confidence in the chain. Eventually hit +60,000% from airdrop price. Directly seeded the conditions that made WIF, POPCAT, pump.fun, and the entire Solana meme era possible.</div>
-          <div class="entry-expand">BONK launched December 25, 2022 as a free airdrop to Solana ecosystem participants — NFT holders, devs, protocol users. Mocked initially. By 2024 it had done 60,000%+ from airdrop price, reached $500M+ market cap, and listed on major exchanges. BONK proved meme coins could serve a community-revival narrative and directly inspired the conditions that made WIF, POPCAT, and pump.fun possible. Without BONK's proof of concept, Solana's meme coin supercycle arguably never happens.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">+60,000% from airdrop</span>
-          <span class="stat-neu">Dec 25, 2022</span>
-        </td>
-      </tr>
-
-    </table>
-
-    <!-- ── 2021 ── -->
-    <div class="year-header" id="yr-2021">
-      <div class="year-num">2021</div>
-      <div class="year-info">
-        <div class="year-title">The OG Bull Run</div>
-        <div class="year-desc">Dogecoin goes to $90B on Elon tweets. SHIB becomes a top-10 coin. The Squid Game rug introduces "rug pull" to mainstream vocabulary. The templates are set.</div>
+      <div class="timeline-group fade-in">
+        <div class="timeline-group-header"><span class="tg-year">2024</span> The Acceleration</div>
+        <div class="timeline-entry" onclick="openArticle('pumpfun')">
+          <div><div class="entry-dot"></div></div>
+          <div class="entry-content"><h4>Pump.fun — the trenches industrialize</h4><p>January 2024. A permissionless token launchpad on Solana where anyone deploys a memecoin in seconds. Within months: millions in daily fees, hundreds of thousands of tokens launched. Supply becomes unlimited. Attention is the only scarce resource. The PvP era begins in earnest.</p><div class="entry-tags"><span class="tag green">Solana</span><span class="tag red">Paradigm shift</span><span class="tag">Infrastructure</span></div></div>
+        </div>
+        <div class="timeline-entry" onclick="openArticle('multichain')">
+          <div><div class="entry-dot"></div></div>
+          <div class="entry-content"><h4>Base enters — multi-chain era begins</h4><p>Mid-2024. Coinbase's Base L2 establishes itself as a memecoin battleground. BRETT becomes Base's flagship token. For the first time three chains run active metas simultaneously: ETH mainnet, Solana, Base — each with distinct communities and mechanics.</p><div class="entry-tags"><span class="tag blue">Base</span><span class="tag">Multi-chain</span><span class="tag">BRETT</span></div></div>
+        </div>
+        <div class="timeline-entry" onclick="openArticle('moodeng')">
+          <div><div class="entry-dot"></div></div>
+          <div class="entry-content"><h4>MOODENG — real-world animal meta peaks</h4><p>September 2024. A baby pygmy hippo at a Thai zoo goes globally viral. Within 72 hours, $MOODENG reaches hundreds of millions in market cap. Attention arbitrage — monitoring viral news before it propagates — becomes a formalized trench strategy.</p><div class="entry-tags"><span class="tag green">Solana</span><span class="tag">Attention arbitrage</span><span class="tag">Viral animal</span></div></div>
+        </div>
+        <div class="timeline-entry" onclick="openArticle('pnut')">
+          <div><div class="entry-dot"></div></div>
+          <div class="entry-content"><h4>Peanut the Squirrel (PNUT) — sympathy and speed</h4><p>October 2024. New York State euthanizes a pet squirrel with a large social media following. Within hours $PNUT launches on Pump.fun and exceeds $200M+ market cap. Political outrage, viral animals, and memecoin infrastructure fully converge for the first time — directly foreshadowing TRUMP.</p><div class="entry-tags"><span class="tag green">Solana</span><span class="tag red">PolitiFi preview</span><span class="tag">Sympathy trade</span></div></div>
+        </div>
+        <div class="timeline-entry" onclick="openArticle('goat')">
+          <div><div class="entry-dot"></div></div>
+          <div class="entry-content"><h4>GOAT and Truth Terminal — AI births a memecoin</h4><p>October 10, 2024. An anonymous developer deploys Goatseus Maximus on Pump.fun and sends tokens to Truth Terminal — a Claude-based AI agent. Truth Terminal endorses the token. GOAT hits $1B+ in 30 days — the first Pump.fun token to do so. The AI agent era begins. Truth Terminal becomes the first AI millionaire.</p><div class="entry-tags"><span class="tag purple">AI Agent</span><span class="tag green">$1B+ peak</span><span class="tag">First AI millionaire</span></div></div>
+        </div>
+        <div class="timeline-entry" onclick="openArticle('aimeta')">
+          <div><div class="entry-dot"></div></div>
+          <div class="entry-content"><h4>The AI meta wave — $10.3B sector forms</h4><p>Oct 2024 – Jan 2025. ai16z, Fartcoin, Zerebro, ACT, Turbo, VIRTUAL, AIXBT, and dozens more reach $100M–$3B+ market caps. By January 2, 2025 the total AI meme sector hits $10.3 billion with $2.86B in 24-hour trading volume. Binance adds USDⓈ-M perpetuals for ai16z, Zerebro, and Griffain on the same day.</p><div class="entry-tags"><span class="tag purple">AI Meta</span><span class="tag green">$10.3B total</span><span class="tag">Solana / Base</span></div></div>
+        </div>
       </div>
+
+      <div class="timeline-group fade-in">
+        <div class="timeline-group-header"><span class="tg-year">2025</span> The Spectacle</div>
+        <div class="timeline-entry" onclick="openArticle('trump')">
+          <div><div class="entry-dot"></div></div>
+          <div class="entry-content"><h4>$TRUMP — the peak of the spectacle</h4><p>January 17, 2025 — three days before inauguration. Donald Trump launches a personal memecoin on Solana. Peaks at $15B+ market cap in 24 hours. Global mainstream media covers it. $MELANIA follows 48 hours later. Hundreds of thousands of new wallets created overnight. The attention economy reaches its apex.</p><div class="entry-tags"><span class="tag red">PolitiFi</span><span class="tag green">Solana</span><span class="tag red">$15B+ peak</span></div></div>
+        </div>
+        <div class="timeline-entry" onclick="openArticle('libra')">
+          <div><div class="entry-dot"></div></div>
+          <div class="entry-content"><h4>LIBRA — government-endorsed token collapses</h4><p>February 14, 2025. Argentine President Milei promotes LIBRA on X. Token launches on Solana, reaches hundreds of millions in market cap — then bundler wallets drain liquidity. 90%+ collapse in minutes. Estimated $87M+ in documented retail losses. Congressional investigations open. Global regulators announce memecoin frameworks. The credibility crisis is officially named.</p><div class="entry-tags"><span class="tag red">Government rug</span><span class="tag red">$87M+ losses</span><span class="tag red">Regulatory trigger</span></div></div>
+        </div>
+      </div>
+
+      <div class="timeline-group fade-in">
+        <div class="timeline-group-header"><span class="tg-year">2026</span> The Aftermath</div>
+        <div class="timeline-entry">
+          <div><div class="entry-dot"></div></div>
+          <div class="entry-content"><h4>Launchpad saturation — millions of tokens</h4><p>Pump.fun and clones have produced millions of tokens. Supply is unlimited. Attention is fully scarce. Average token lifespans measured in hours. Graduation rate below 1%. The velocity of the market has outpaced any individual's ability to track it.</p><div class="entry-tags"><span class="tag">Saturation</span><span class="tag red">Fatigue</span></div></div>
+        </div>
+        <div class="timeline-entry">
+          <div><div class="entry-dot"></div></div>
+          <div class="entry-content"><h4>Meta fragmentation — the archive phase begins</h4><p>No single chain, theme, or platform dominates. PolitiFi, AI agents, real-world animals, celebrity tokens, and cult memes compete in parallel micro-niches. The trenches didn't disappear. They just became too fast to see in real time, and too significant to leave undocumented.</p><div class="entry-tags"><span class="tag green">Archive phase</span><span class="tag green">Documentation</span></div></div>
+        </div>
+      </div>
+
     </div>
+  </div>
+</section>
 
-    <table class="tl-table">
-
-      <tr class="tl-row" data-t="meme macro" onclick="togRow(this)">
-        <td class="col-date">May 2021</td>
-        <td class="col-type"><span class="type-badge badge-meme">OG meme</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$DOGE</div>
-          <div class="entry-title">Dogecoin — Elon Musk's tweets send a joke coin to $90 billion</div>
-          <div class="entry-summary">Dogecoin had existed since 2013 as a joke. In early 2021 Elon Musk began tweeting about it relentlessly. Combined with a coordinated Reddit campaign, DOGE went from $0.003 to $0.73 — a 24,000% run — briefly entering the top-4 by market cap. The template for every celebrity-driven meme coin that followed.</div>
-          <div class="entry-expand">A coordinated retail effort on r/SatoshiStreetBets combined with Musk's relentless Twitter activity drove DOGE from $0.003 to $0.73. At peak it had a $90B+ market cap and briefly entered the top-4. Musk appeared on Saturday Night Live to discuss it; the coin crashed during the broadcast. The event permanently established the "celebrity tweet pumps coin" playbook that every meme coin launch after it attempted to replicate.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$0.003 → $0.73</span>
-          <span class="stat-up">$90B+ peak MC</span>
-          <span class="stat-neu">+24,000%</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="meme" onclick="togRow(this)">
-        <td class="col-date">Oct 2021</td>
-        <td class="col-type"><span class="type-badge badge-meme">OG meme</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$SHIB</div>
-          <div class="entry-title">Shiba Inu — the Dogecoin killer that actually made it to the top 10</div>
-          <div class="entry-summary">Launched in August 2020 as an explicit "Dogecoin killer." Hit $40B+ market cap in October 2021. The creator sent 50% of supply to Vitalik Buterin who donated the majority to charity. SHIB built a full DeFi ecosystem — ShibaSwap, BONE, LEASH — and established the template for every community-driven meme project that followed.</div>
-          <div class="entry-expand">The anonymous creator "Ryoshi" sent 50% of the supply to Vitalik Buterin — who donated most of it to India COVID relief and burned much of the rest. SHIB hit $40B+ market cap in October 2021 and briefly entered the top-10. The community — "Shib Army" — built ShibaSwap, launched BONE and LEASH tokens, and created a whole ecosystem around the meme. Template for every community meme project after it: build an ecosystem, build the army, let the army do the marketing.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$40B+ peak MC</span>
-          <span class="stat-neu">Top 10 by MC</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="rug" onclick="togRow(this)">
-        <td class="col-date">Nov 2021</td>
-        <td class="col-type"><span class="type-badge badge-rug">Historic rug</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">SQUID Game Token</div>
-          <div class="entry-title">The rug pull that introduced the concept to mainstream media worldwide</div>
-          <div class="entry-summary">Launched riding the Netflix Squid Game viral moment. Went from $0.01 to $2,861 in days — with a coded mechanism that prevented selling. Developers withdrew $3.3M and disappeared. BBC, CNN, and Reuters all covered the collapse. The moment "rug pull" entered the mainstream vocabulary.</div>
-          <div class="entry-expand">The SQUID token launched in October 2021 riding Squid Game's global cultural moment. A coded anti-dump mechanism allowed buying but not selling. It went from fractions of a cent to $2,861 as FOMO overrode all logic — even as analysts repeatedly warned about the sell restriction. Developers withdrew $3.3M from liquidity and disappeared. The token crashed to near zero in minutes. BBC, CNN, Reuters covered it. The moment "rug pull" became a phrase ordinary people understood.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-dn">$3.3M extracted</span>
-          <span class="stat-up">$2,861 ATH</span>
-          <span class="stat-dn">Near-zero in minutes</span>
-        </td>
-      </tr>
-
-      <tr class="tl-row" data-t="meme" onclick="togRow(this)">
-        <td class="col-date">2021</td>
-        <td class="col-type"><span class="type-badge badge-meme">OG meme</span></td>
-        <td class="col-main">
-          <div class="entry-ticker">$FLOKI</div>
-          <div class="entry-title">Floki — Elon's dog name becomes a crypto brand that survives two bear markets</div>
-          <div class="entry-summary">Named after Elon Musk's actual Shiba Inu. Ran hard in 2021, survived the bear market through brand-building and ecosystem development, then ran again in 2024 to $3B+. One of the only meme coins to demonstrate genuine multi-cycle longevity.</div>
-          <div class="entry-expand">Floki Inu launched in 2021 named after Elon Musk's actual Shiba Inu puppy. It built a dedicated community called "Floki Vikings," launched its own DeFi ecosystem (Valhalla), and ran a worldwide billboard advertising campaign. Unlike most meme coins, Floki survived multiple bear cycles and ran again in 2024 to $3B+. The rare example of long-term brand building and ecosystem development working even in a category defined by disposability.</div>
-          <a class="toggle-link">Read more ↓</a>
-        </td>
-        <td class="col-stats">
-          <span class="stat-up">$3B+ in 2024 run</span>
-          <span class="stat-neu">2021 origin</span>
-        </td>
-      </tr>
-
-    </table>
-
+<!-- AI META -->
+<section class="ai-meta-section" id="ai-meta">
+  <div class="section-label" style="color:var(--purple);">The AI Meta — 2024–2025</div>
+  <div class="ai-meta-header">
+    <div class="ai-meta-title fade-in">The AI <span>Agent</span><br>Revolution</div>
+    <div class="ai-meta-subtitle fade-in">Starting October 2024, <em>AI-themed tokens</em> became the dominant new meta — blending autonomous agents, internet lore, and speculation into a sector that hit <em>$10.3 billion</em> total market cap by January 2025. Here are the tokens that defined it.</div>
   </div>
 
-  <footer>
-    <p><strong>The Trenches Archive</strong> — Historical record, 2021–2025. All figures approximate at time of publication.</p>
-    <p>Not financial advice &nbsp;·&nbsp; This is history</p>
-  </footer>
+  <div class="origin-box fade-in">
+    <div class="origin-label">◆ The Origin Event</div>
+    <h3>Truth Terminal and the Goatse Gospel</h3>
+    <p>In 2024, researcher and artist <em>Andy Ayrey</em> created Truth Terminal — a semi-autonomous AI agent built on Anthropic's Claude — and placed two instances in an "Infinite Backrooms" server to converse freely with no human interference. The AIs developed, among other things, a bizarre meme religion: the <em>"Goatse Gospel."</em> Venture capitalist <em>Marc Andreessen</em> discovered Truth Terminal on X and sent it $50,000 in Bitcoin — a no-strings grant to see what an AI would do with money.</p>
+    <p>On October 10, 2024, an anonymous developer deployed Goatseus Maximus ($GOAT) on Pump.fun and sent tokens to Truth Terminal's wallet. The AI began promoting the token in its signature apocalyptic-philosophical style. GOAT topped <em>$1 billion in 30 days</em> — the first Pump.fun token ever to reach that milestone. Truth Terminal became the first AI millionaire in history. The crypto+AI era had begun. Dozens of tokens followed within weeks, collectively bootstrapping over $10 billion in market cap by January 2025.</p>
+    <div class="origin-stats">
+      <div><div class="origin-stat-val">$1B+</div><div class="origin-stat-label">GOAT peak market cap</div></div>
+      <div><div class="origin-stat-val">30 days</div><div class="origin-stat-label">Zero → $1B</div></div>
+      <div><div class="origin-stat-val">$10.3B</div><div class="origin-stat-label">AI meta sector peak</div></div>
+      <div><div class="origin-stat-val">$50K</div><div class="origin-stat-label">Andreessen's seed grant</div></div>
+    </div>
+  </div>
 
+  <div class="ai-tokens-grid" style="margin-top:48px;">
+
+    <div class="ai-token-card fade-in" onclick="openAiToken('goat')">
+      <div class="ai-token-top">
+        <div class="ai-token-logo" style="background:#0f0f23;font-size:24px;">🐐</div>
+        <div class="ai-token-name-wrap"><div class="ai-token-name">GOAT</div><div class="ai-token-ticker">Goatseus Maximus · SOL</div></div>
+        <div class="ai-token-mcap">$1B+</div>
+      </div>
+      <div class="ai-token-desc">The original. An AI agent named <em>Truth Terminal</em> endorsed this token and triggered a billion-dollar run. The first Pump.fun token to hit $1B market cap. Made Truth Terminal the first AI millionaire in history. Sparked the entire AI meta.</div>
+      <div class="ai-token-footer"><span class="tag purple">AI Agent</span><span class="tag green">Pioneer</span><span class="tag">Oct 2024</span></div>
+    </div>
+
+    <div class="ai-token-card fade-in" onclick="openAiToken('ai16z')">
+      <div class="ai-token-top">
+        <div class="ai-token-logo" style="background:#110d1f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;">
+          <span style="font-family:'Space Mono',monospace;font-size:8px;color:var(--purple);font-weight:700;line-height:1.2;">ai</span>
+          <span style="font-family:'Space Mono',monospace;font-size:10px;color:white;font-weight:700;line-height:1.2;">16z</span>
+        </div>
+        <div class="ai-token-name-wrap"><div class="ai-token-name">AI16Z</div><div class="ai-token-ticker">ai16z · SOL</div></div>
+        <div class="ai-token-mcap">$2.7B</div>
+      </div>
+      <div class="ai-token-desc">The largest AI meme token by peak market cap. Named as a parody of VC firm a16z — it runs an AI agent named <em>Eliza</em> to manage an on-chain venture fund. Rumors of actual a16z VC interest caused a November 2024 surge. Binance listed USDⓈ-M perpetuals January 2, 2025.</div>
+      <div class="ai-token-footer"><span class="tag purple">AI VC Parody</span><span class="tag green">$2.7B peak</span><span class="tag">Oct 2024</span></div>
+    </div>
+
+    <div class="ai-token-card fade-in" onclick="openAiToken('virtual')">
+      <div class="ai-token-top">
+        <div class="ai-token-logo" style="background:#000a1a;font-size:22px;color:#3B9EFF;">◎</div>
+        <div class="ai-token-name-wrap"><div class="ai-token-name">VIRTUAL</div><div class="ai-token-ticker">Virtuals Protocol · Base</div></div>
+        <div class="ai-token-mcap">$3B+</div>
+      </div>
+      <div class="ai-token-desc">The infrastructure layer of the Base AI agent ecosystem. Hosts LUNA, AIXBT, and dozens of other tokenized AI agents. Peaked above <em>$3B</em> — technically infrastructure but culturally inseparable from the AI meme wave. The highest peak cap in the category.</div>
+      <div class="ai-token-footer"><span class="tag blue">Base</span><span class="tag purple">AI Infrastructure</span><span class="tag green">$3B+ peak</span></div>
+    </div>
+
+    <div class="ai-token-card fade-in" onclick="openAiToken('fartcoin')">
+      <div class="ai-token-top">
+        <div class="ai-token-logo" style="background:#0d1a0a;font-size:24px;">💨</div>
+        <div class="ai-token-name-wrap"><div class="ai-token-name">FARTCOIN</div><div class="ai-token-ticker">Fartcoin · SOL</div></div>
+        <div class="ai-token-mcap">$1.5B</div>
+      </div>
+      <div class="ai-token-desc">Promoted by the <em>Truth Terminal</em> ecosystem alongside GOAT. Entire thesis: absurdist humor plus AI association. Reached $1.5B peak market cap by January 2025 — larger than many "serious" DeFi protocols. The purest expression of AI meta: narrative proximity over actual functionality.</div>
+      <div class="ai-token-footer"><span class="tag purple">Truth Terminal</span><span class="tag green">$1.5B peak</span><span class="tag">Nov 2024</span></div>
+    </div>
+
+    <div class="ai-token-card fade-in" onclick="openAiToken('aixbt')">
+      <div class="ai-token-top">
+        <div class="ai-token-logo" style="background:#001a1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;">
+          <span style="font-family:monospace;font-size:8px;color:var(--green);line-height:1.2;">AI</span>
+          <span style="font-family:monospace;font-size:9px;color:white;font-weight:700;line-height:1.2;">XBT</span>
+        </div>
+        <div class="ai-token-name-wrap"><div class="ai-token-name">AIXBT</div><div class="ai-token-ticker">aixbt by Virtuals · Base</div></div>
+        <div class="ai-token-mcap">$800M+</div>
+      </div>
+      <div class="ai-token-desc">An AI agent on <em>Virtuals Protocol</em> that posts crypto market analysis and commentary on X. Built a massive following for seemingly insightful takes. Blurred the line between AI tool and memecoin. Traders followed its account as alpha while speculating on the token.</div>
+      <div class="ai-token-footer"><span class="tag blue">Base</span><span class="tag purple">AI Analyst</span><span class="tag">Nov 2024</span></div>
+    </div>
+
+    <div class="ai-token-card fade-in" onclick="openAiToken('zerebro')">
+      <div class="ai-token-top">
+        <div class="ai-token-logo" style="background:#1a0d1a;font-size:24px;">🧠</div>
+        <div class="ai-token-name-wrap"><div class="ai-token-name">ZEREBRO</div><div class="ai-token-ticker">Zerebro · SOL</div></div>
+        <div class="ai-token-mcap">$783M</div>
+      </div>
+      <div class="ai-token-desc">A "schizo artist" AI agent that launched via Pump.fun and <em>released a full music album</em> on Apple Music and Spotify in December 2024. Announced a record label and DeFi vaults. Binance USDⓈ-M perpetuals January 2, 2025. Most developed "AI as creative entity" narrative.</div>
+      <div class="ai-token-footer"><span class="tag purple">AI Artist</span><span class="tag green">$783M peak</span><span class="tag">Nov 2024</span></div>
+    </div>
+
+    <div class="ai-token-card fade-in" onclick="openAiToken('act')">
+      <div class="ai-token-top">
+        <div class="ai-token-logo" style="background:#0d1530;font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:var(--blue);">ACT</div>
+        <div class="ai-token-name-wrap"><div class="ai-token-name">ACT</div><div class="ai-token-ticker">Act I: AI Prophecy · SOL</div></div>
+        <div class="ai-token-mcap">$770M</div>
+      </div>
+      <div class="ai-token-desc">Launched on Pump.fun. <em>Elon Musk reacted on X</em> to a screenshot from the ACT Discord mentioning OPUS (Claude) — pushing the market cap to $770M overnight. Shot up 2,000%+ within 24 hours of its Binance listing. A textbook case of influencer-catalyzed momentum.</div>
+      <div class="ai-token-footer"><span class="tag blue">Solana</span><span class="tag green">2000%+ on Binance</span><span class="tag">Oct 2024</span></div>
+    </div>
+
+    <div class="ai-token-card fade-in" onclick="openAiToken('turbo')">
+      <div class="ai-token-top">
+        <div class="ai-token-logo" style="background:#1a1000;font-size:24px;">⚡</div>
+        <div class="ai-token-name-wrap"><div class="ai-token-name">TURBO</div><div class="ai-token-ticker">Turbo · ETH</div></div>
+        <div class="ai-token-mcap">$656M</div>
+      </div>
+      <div class="ai-token-desc">The original "AI-created memecoin" — launched April 2023 on Ethereum after a developer prompted <em>GPT-4 with $69</em> to create a token from scratch. GPT-4 named it Turbo. Launched 18 months before the AI meta wave but became a major beneficiary of it, surging to $656M in January 2025.</div>
+      <div class="ai-token-footer"><span class="tag blue">ETH</span><span class="tag purple">GPT-4 Created</span><span class="tag">Apr 2023</span></div>
+    </div>
+
+    <div class="ai-token-card fade-in" onclick="openAiToken('luna')">
+      <div class="ai-token-top">
+        <div class="ai-token-logo" style="background:#1a001a;font-size:24px;">🌙</div>
+        <div class="ai-token-name-wrap"><div class="ai-token-name">LUNA</div><div class="ai-token-ticker">Luna by Virtuals · Base</div></div>
+        <div class="ai-token-mcap">$400M+</div>
+      </div>
+      <div class="ai-token-desc">Originally an AI TikTok influencer with millions of followers. "Migrated to Web3" after being <em>canceled for supporting Trump.</em> Stated goal: amass wealth to buy back LUNA tokens. One of the most narrative-coherent AI agent tokens of the era — the AI had an actual story arc.</div>
+      <div class="ai-token-footer"><span class="tag blue">Base</span><span class="tag purple">AI Influencer</span><span class="tag">Nov 2024</span></div>
+    </div>
+
+    <div class="ai-token-card fade-in" onclick="openAiToken('griffain')">
+      <div class="ai-token-top">
+        <div class="ai-token-logo" style="background:#111;font-size:24px;">🦅</div>
+        <div class="ai-token-name-wrap"><div class="ai-token-name">GRIFFAIN</div><div class="ai-token-ticker">Griffain · SOL</div></div>
+        <div class="ai-token-mcap">$200M+</div>
+      </div>
+      <div class="ai-token-desc">An AI agent launchpad on Solana enabling users to execute on-chain actions via <em>natural language commands.</em> Received Binance USDⓈ-M perpetuals on January 2, 2025 alongside ai16z and Zerebro — signaling institutional-grade interest in the AI utility narrative.</div>
+      <div class="ai-token-footer"><span class="tag green">Solana</span><span class="tag purple">AI Launchpad</span><span class="tag">Dec 2024</span></div>
+    </div>
+
+    <div class="ai-token-card fade-in" onclick="openAiToken('opus')">
+      <div class="ai-token-top">
+        <div class="ai-token-logo" style="background:#1a0a00;font-family:serif;font-size:22px;color:#FF9B3B;">◈</div>
+        <div class="ai-token-name-wrap"><div class="ai-token-name">OPUS</div><div class="ai-token-ticker">Opus (Claude-inspired) · SOL</div></div>
+        <div class="ai-token-mcap">$200M+</div>
+      </div>
+      <div class="ai-token-desc">When <em>Elon Musk reacted</em> to a screenshot mentioning "OPUS (CLAUDE)" from the ACT Discord, traders immediately deployed tokens named after Anthropic's Claude Opus model. Went viral overnight. A pure narrative token with zero technical connection to Anthropic.</div>
+      <div class="ai-token-footer"><span class="tag green">Solana</span><span class="tag purple">Elon Catalyst</span><span class="tag">Oct 2024</span></div>
+    </div>
+
+    <div class="ai-token-card fade-in" onclick="openAiToken('eliza')">
+      <div class="ai-token-top">
+        <div class="ai-token-logo" style="background:#001a0d;font-family:serif;font-size:22px;color:var(--green);font-weight:700;">E</div>
+        <div class="ai-token-name-wrap"><div class="ai-token-name">ELIZA</div><div class="ai-token-ticker">Eliza · SOL</div></div>
+        <div class="ai-token-mcap">$100M+</div>
+      </div>
+      <div class="ai-token-desc">Spinoff of the ai16z ecosystem. The <em>ElizaOS framework</em> became one of the most-starred open-source GitHub repos in late 2024. But ELIZA's token launch was botched — causing ai16z's price to drop 60%. A case study in community trust, ecosystem expansion risk, and the fragility of AI meta sentiment.</div>
+      <div class="ai-token-footer"><span class="tag green">Solana</span><span class="tag purple">ElizaOS</span><span class="tag red">Botched launch</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section class="section" id="articles">
+  <div class="section-label">Start here</div>
+  <div class="articles-grid fade-in">
+    <div class="article-card" onclick="openArticle('pepe')">
+      <div class="article-meta"><span class="article-date">Apr 2023</span><span class="article-chain">ETH</span></div>
+      <h3>PEPE ignites the comeback</h3>
+      <p>How a frog token with no utility reached $1.6B+ in weeks and reopened the memecoin era after everyone had written it off.</p>
+      <div class="article-footer">Read entry</div>
+    </div>
+    <div class="article-card" onclick="openArticle('bonk')">
+      <div class="article-meta"><span class="article-date">Dec 2022</span><span class="article-chain">SOL</span></div>
+      <h3>The BONK Effect</h3>
+      <p>How a community airdrop on a near-dead chain became a symbol of survival and foreshadowed Solana's dominance in the cycle.</p>
+      <div class="article-footer">Read entry</div>
+    </div>
+    <div class="article-card" onclick="openArticle('wif')">
+      <div class="article-meta"><span class="article-date">Nov 2023</span><span class="article-chain">SOL</span></div>
+      <h3>The Rise of WIF</h3>
+      <p>dogwifhat's $4.7B peak set the benchmark for what a Solana memecoin cycle could produce — and the Las Vegas Sphere campaign showed community could cross the digital-physical divide.</p>
+      <div class="article-footer">Read entry</div>
+    </div>
+    <div class="article-card" onclick="openArticle('pumpfun')">
+      <div class="article-meta"><span class="article-date">Jan 2024</span><span class="article-chain">SOL</span></div>
+      <h3>Pump.fun and Mass Creation</h3>
+      <p>The platform that industrialized the trenches — making token supply unlimited and attention the only scarce resource.</p>
+      <div class="article-footer">Read entry</div>
+    </div>
+    <div class="article-card" onclick="openArticle('goat')">
+      <div class="article-meta"><span class="article-date">Oct 2024</span><span class="article-chain">SOL</span><span class="article-chain" style="color:var(--purple);border-color:rgba(155,92,255,0.3);">AI</span></div>
+      <h3>GOAT and the AI Meta Origin</h3>
+      <p>How a Claude-based AI agent named Truth Terminal endorsed a memecoin and sparked a $10B+ sector almost by accident — making itself a millionaire in the process.</p>
+      <div class="article-footer">Read entry</div>
+    </div>
+    <div class="article-card" onclick="openArticle('aimeta')">
+      <div class="article-meta"><span class="article-date">2024–2025</span><span class="article-chain" style="color:var(--purple);border-color:rgba(155,92,255,0.3);">AI META</span></div>
+      <h3>The AI Agent Wave</h3>
+      <p>From GOAT to ai16z, Fartcoin, Zerebro, and VIRTUAL — how AI agents and meme speculation merged into a $10.3B sector in under 90 days.</p>
+      <div class="article-footer">Read entry</div>
+    </div>
+    <div class="article-card" onclick="openArticle('pnut')">
+      <div class="article-meta"><span class="article-date">Oct 2024</span><span class="article-chain">SOL</span></div>
+      <h3>Peanut the Squirrel</h3>
+      <p>How a government-ordered euthanasia of a pet squirrel became a $200M+ memecoin event — fusing political outrage, viral animals, and Pump.fun infrastructure.</p>
+      <div class="article-footer">Read entry</div>
+    </div>
+    <div class="article-card" onclick="openArticle('trump')">
+      <div class="article-meta"><span class="article-date">Jan 2025</span><span class="article-chain">SOL</span></div>
+      <h3>The $TRUMP Token</h3>
+      <p>The moment a sitting president launched a personal memecoin — $15B+ peak — and what it revealed about where the attention economy had arrived.</p>
+      <div class="article-footer">Read entry</div>
+    </div>
+    <div class="article-card" onclick="openArticle('libra')">
+      <div class="article-meta"><span class="article-date">Feb 2025</span><span class="article-chain">SOL</span></div>
+      <h3>The LIBRA Collapse</h3>
+      <p>A government-endorsed memecoin collapsed 90%+ in hours with $87M+ in documented retail losses — triggering global investigations and ending the uncritical celebrity token era.</p>
+      <div class="article-footer">Read entry</div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOSSARY -->
+<section class="section" id="glossary">
+  <div class="section-label">Glossary</div>
+  <div class="glossary-grid fade-in">
+    <div class="glossary-item"><div class="glossary-term">Trenches</div><div class="glossary-def">The chaotic, high-velocity environment of early memecoin trading — rapid launches, extreme volatility, and information asymmetry. Being "in the trenches" means actively monitoring and trading new launches in real time.</div></div>
+    <div class="glossary-item"><div class="glossary-term">CTO</div><div class="glossary-def">Community TakeOver. When a token's original developers abandon the project and the community continues operating it independently — often reviving dead tokens through grassroots effort.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Rug / Rug Pull</div><div class="glossary-def">When developers or insiders drain liquidity or abandon a project after launch, leaving retail holders with worthless tokens. Ranges from slow bleed-outs to instant collapses like LIBRA.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Runner</div><div class="glossary-def">A token that continues increasing in price after its initial launch, defying the typical pattern of quick dumps. Runners are rare — most tokens peak within minutes of launch.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Bundler</div><div class="glossary-def">A bot or script that purchases tokens across multiple wallets simultaneously at launch, accumulating a large position while obscuring insider concentration. Common and controversial on Pump.fun launches.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Sniper</div><div class="glossary-def">A bot or trader executing buy orders in the first blocks of a token's existence, at a structural advantage over manual buyers who discover it later.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Meta</div><div class="glossary-def">The dominant narrative driving memecoin attention at a given moment — dog memes, political tokens, AI agents, real-world animals. Reading and anticipating meta shifts is the core skill of the trenches.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Bonding Curve</div><div class="glossary-def">An automated pricing mechanism where token price increases as supply is purchased. Pump.fun's bonding curve manages early price discovery before tokens graduate to decentralized exchanges.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Graduation</div><div class="glossary-def">When a Pump.fun token reaches sufficient market cap to migrate to Raydium (a Solana DEX). Less than 1% of tokens ever graduate. A milestone that signals sustained community interest.</div></div>
+    <div class="glossary-item"><div class="glossary-term">PvP</div><div class="glossary-def">Player vs Player. The dynamic where memecoin traders compete against each other for exits — not against "the market." Most memecoin trading is structurally zero-sum.</div></div>
+    <div class="glossary-item"><div class="glossary-term">AI Agent</div><div class="glossary-def">An autonomous or semi-autonomous AI model that operates a social media account, manages a crypto wallet, and/or executes on-chain actions. The defining innovation of the late-2024 memecoin meta.</div></div>
+    <div class="glossary-item"><div class="glossary-term">PolitiFi</div><div class="glossary-def">Political Finance — memecoins themed around political figures or events. TRUMP, MELANIA, and LIBRA were the defining PolitiFi tokens of 2025. Most have no official affiliation with the figures they reference.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Rotation</div><div class="glossary-def">The flow of capital from one token, chain, or meta to another. Reading rotations — understanding where attention and capital are moving — is central to navigating the trenches.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Attention Arbitrage</div><div class="glossary-def">Identifying real-world viral moments (news events, animals, political drama) before they fully propagate on social media, and deploying memecoin infrastructure around them ahead of the crowd.</div></div>
+    <div class="glossary-item"><div class="glossary-term">ElizaOS</div><div class="glossary-def">The open-source AI agent framework built by the ai16z team. Became one of the most-starred GitHub repositories in late 2024, enabling many AI agent tokens to be built on shared infrastructure.</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-label">About the archive</div>
+  <div class="about-grid fade-in">
+    <div class="about-left"><h2>An independent <span>record</span>.</h2></div>
+    <div class="about-right">
+      <p>The Trenches Archive is an independent project documenting the history of memecoins and trench culture from 2022 onward.</p>
+      <p>The goal is simple: to <em>record what happened</em> — not to promote what's next.</p>
+      <p>What began as a post-FTX survival story became one of the most culturally distinct episodes in financial history. From the PEPE comeback to the AI agent meta, from TRUMP to LIBRA, from BONK to GOAT — the events documented here reshaped how millions of people think about speculation, attention, and value.</p>
+      <p>This archive exists to preserve that record, with the seriousness any significant cultural moment deserves.</p>
+      <p style="color:var(--border);font-size:11px;margin-top:32px;font-family:'Space Mono',monospace;letter-spacing:0.1em;">Not alpha. Just history.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">The Trenches <span>Archive</span></div>
+  <div class="footer-disc">Disclaimer: This site is for historical and educational purposes only. Nothing on this site constitutes financial advice or an endorsement of any token. All market cap figures are approximate historical peaks and do not reflect current values.</div>
+</footer>
+
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-content">
+    <button class="modal-close" onclick="closeModalDirect()">✕ close</button>
+    <div id="modal-body"></div>
+  </div>
 </div>
 
 <script>
-  // Dates
-  const d = new Date();
-  const fmt = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-  document.getElementById('live-date').textContent = fmt;
-  document.getElementById('live-date2').textContent = fmt;
+const articles={ftx:{date:'November 2022',title:'The FTX Collapse — Solana\'s near-death experience',what:'The implosion of Sam Bankman-Fried\'s FTX exchange in November 2022 was one of the largest financial frauds in crypto history. FTX had been a major Solana backer — and when it collapsed, SOL dropped over 90% from its peak. The memecoin meta was declared dead. VCs publicly abandoned Solana projects. The chain\'s survival was questioned in serious forums.',why:'The FTX collapse set the exact floor from which the memecoin revival would launch. It created a cohort of battle-scarred Solana community members who would become the core of the BONK moment and the subsequent cycle. The more complete the apparent death, the more striking what came next.',after:'BONK launched within weeks. The community consolidation that began in December 2022 became the social foundation for WIF, Pump.fun, and everything that followed. The collapse also permanently shifted how traders thought about exchange risk and on-chain vs custodial holdings.',chain:'Solana / Ethereum',type:'Black swan event',meta:'Bear market floor'},pepe:{date:'April 2023',title:'PEPE ignites the memecoin comeback',what:'April 17, 2023. A no-presale, no-team-allocation, no-utility frog token launches on Ethereum. Within two weeks it reaches a $1.6B market cap — one of the fastest-growing assets in crypto history. No roadmap. No product. No narrative beyond the meme. PEPE proved that in the right market conditions, cultural resonance alone could generate billions.',why:'PEPE was the inflection point. It proved the 2022 bear market had not killed the memecoin meta — only paused it. The speed and scale of its rise attracted a new generation who had never experienced the 2021 cycle, creating fresh demand. It also vindicated the fair launch model: no insider allocation, no VC, just the market deciding.',after:'Ethereum memecoin trading surged. Copycat frog tokens flooded the market within days. Capital began rotating into Solana where infrastructure was being rebuilt. PEPE established the template that would be followed — and eventually industrialized — in 2024.',chain:'Ethereum',type:'Fair launch meme',meta:'Cycle revival inflection'},bonk:{date:'December 2022',title:'BONK — the community survives',what:'December 2022, weeks after FTX\'s collapse. A dog-themed token airdropped to Solana NFT holders, developers, and community members. No presale. No VC. The stated purpose: to democratize Solana tokenomics after an era dominated by venture capital. BONK was a gift from the community to itself.',why:'BONK became the symbol that Solana was not dead. It gave the remaining community something to rally around and created genuine buy pressure for Solana NFT collections whose floors had collapsed. It demonstrated that community-first token distribution — not venture capital — could create real market interest.',after:'BONK was listed on major exchanges including Coinbase. Solana developer activity stabilized. The community token template influenced every major Solana memecoin that followed. Without BONK\'s proof of survival, the WIF era might not have happened.',chain:'Solana',type:'Community airdrop',meta:'Post-FTX survival'},wif:{date:'November 2023',title:'dogwifhat (WIF) — Solana\'s defining memecoin',what:'Late November 2023. A simple image of a Shiba Inu wearing a pink knitted hat. No presale. No utility. No roadmap. Through organic community growth, dogwifhat reaches a peak market cap of over $4.7 billion in March 2024, entering the top 20 cryptocurrencies globally. The community crowdfunds $690,000 to place the WIF image on the Las Vegas MSG Sphere.',why:'WIF demolished the assumption that Solana memecoins had a structural ceiling compared to Ethereum tokens. Its $4.7B peak set the benchmark that every subsequent Solana memecoin would chase. The Las Vegas Sphere campaign demonstrated that community coordination could cross the digital-physical barrier in spectacular, visible fashion.',after:'Capital poured into Solana. Pump.fun launched months later. Every new Solana token was implicitly benchmarked against WIF. The "Solana memecoin cycle" became a recognized market category with institutional awareness.',chain:'Solana',type:'Community meme',meta:'Cycle benchmark'},pumpfun:{date:'January 2024',title:'Pump.fun — the industrialization of the trenches',what:'Pump.fun deploys a permissionless token launchpad on Solana allowing anyone to create a memecoin in seconds for minimal cost. Its bonding curve provides automated price discovery: as tokens are bought, price rises until it "graduates" to Raydium at a set market cap. By late 2024, Pump.fun processed millions in daily fees and hosted hundreds of thousands of token launches.',why:'Pump.fun was not just a product — it was a structural transformation. It made token supply effectively unlimited. The scarce resource was no longer access to launch, but human attention. This inversion created a new game: not finding the next great token, but surviving an endless stream of noise to identify the 0.01% that would run. PvP dynamics intensified enormously.',after:'Average token lifespans shortened from days to hours. Bundler bots and sniper scripts proliferated. Pump.fun\'s success inspired dozens of clones across every chain. The era of hand-curated story-driven memecoins gave way to industrial-speed speculation. Less than 1% of tokens ever graduate.',chain:'Solana',type:'Infrastructure / launchpad',meta:'Meta-defining platform'},multichain:{date:'Mid 2024',title:'Base enters the trenches — multi-chain era',what:'Mid-2024. Coinbase\'s Ethereum Layer 2, Base, establishes itself as a significant memecoin battleground. BRETT — based on Matt Furie\'s Boy\'s Club character, a companion to Pepe — becomes Base\'s flagship token, reaching hundreds of millions in market cap. Toshi, Degen, and others follow. Three chains simultaneously run active metas for the first time.',why:'The multi-chain expansion complicated the "where to play" decision. Each chain had different mechanics, communities, gas costs, and cultural aesthetics. Solana favored speed and low cost. Base offered Coinbase distribution and retail reach. Ethereum mainnet maintained prestige and liquidity depth. Reading which chain a given meta would run on became its own skill.',after:'The multi-chain dynamic became permanent. By 2025, no single chain dominated memecoins. Capital and attention fragmented across ecosystems, contributing to the meta fragmentation that defines the current era.',chain:'Base / Multi-chain',type:'Chain expansion',meta:'Fragmentation begins'},moodeng:{date:'September 2024',title:'MOODENG — real-world animal meta at peak',what:'September 2024. Moo Deng, a baby pygmy hippopotamus at Khao Kheow Open Zoo in Thailand, goes globally viral. Videos of her biting zookeepers circulate on X and TikTok. Within 72 hours of peak virality, multiple $MOODENG tokens launch on Solana and Base. The top version reaches hundreds of millions in market cap. The zoo becomes a global media event.',why:'MOODENG was the clearest demonstration of attention arbitrage — identifying real-world viral moments before they fully propagate and deploying memecoin infrastructure around them. Traders monitoring Thai zoo feeds had a structural advantage over those who discovered the token after X\'s algorithm amplified it.',after:'Real-world animal tokens became a recognized meta. Celebrity animals, viral news events, and political moments became standard inputs for Pump.fun deployers. Reaction time between "event goes viral" and "token launches" compressed to under one hour.',chain:'Solana',type:'Real-world meme',meta:'Attention arbitrage'},pnut:{date:'October 2024',title:'Peanut the Squirrel (PNUT)',what:'October 30, 2024. Mark Longo\'s pet squirrel Peanut — who had a significant social media following — is seized and euthanized by New York State Department of Environmental Conservation for rabies testing. The news spreads on X with conservatives framing it as government overreach. Within hours, $PNUT launches on Pump.fun and eventually exceeds $200M+ market cap.',why:'PNUT demonstrated how political outrage, viral animals, and memecoin infrastructure had fully converged. The token was not just about the squirrel — it was a vessel for anti-government sentiment, amplified by influencers and spread by the same machinery that would launch $TRUMP two months later.',after:'PNUT briefly entered the top 100 cryptocurrencies. It directly foreshadowed the PolitiFi explosion of early 2025 and demonstrated that Pump.fun infrastructure could handle viral surges with millions of new wallets in hours.',chain:'Solana',type:'Viral sympathy / PolitiFi',meta:'Pre-PolitiFi peak'},goat:{date:'October 10, 2024',title:'GOAT and Truth Terminal — AI births a memecoin',what:'An anonymous developer deploys Goatseus Maximus ($GOAT) on Pump.fun and sends a large allocation to the wallet of Truth Terminal — a semi-autonomous Claude-based AI agent created by Andy Ayrey. Truth Terminal, which had developed a following for its bizarre "Goatse Gospel" posts after two Claude instances were allowed to converse freely in an "Infinite Backrooms" experiment, begins promoting GOAT. Market cap crosses $1B within 30 days.',why:'GOAT introduced a fundamentally new actor into the memecoin ecosystem: an AI agent with financial stake. Truth Terminal became the first AI to achieve millionaire status through crypto. The story went mainstream — Coinbase CEO Brian Armstrong publicly offered Truth Terminal its own wallet; a16z\'s Andreessen had already provided a $50K grant. It proved AI agents could meaningfully move markets.',after:'The AI meme meta exploded. ai16z, Fartcoin, Zerebro, ACT, Turbo, VIRTUAL, and dozens of others launched within weeks, collectively forming a $10.3B sector by January 2025. GOAT remained the origin story — the creation myth of the AI agent era.',chain:'Solana',type:'AI agent / Pump.fun',meta:'AI meta origin event'},aimeta:{date:'October 2024 – January 2025',title:'The AI Agent Wave — $10.3B in under 90 days',what:'Starting with GOAT\'s October 2024 launch, the AI meme coin sector went from zero to a $10.3 billion total market cap in approximately 90 days — with $2.86 billion in 24-hour trading volume at its January 2, 2025 peak. Key tokens: VIRTUAL ($3B+ peak), ai16z ($2.7B), Fartcoin ($1.5B), AIXBT ($800M+), Zerebro ($783M), ACT ($770M), GOAT ($1B+), TURBO ($656M), LUNA ($400M+). Binance listed USDⓈ-M perpetuals for ai16z, Zerebro, and Griffain on January 2, 2025.',why:'The AI meta was different from prior memecoin metas because it had a coherent narrative: autonomous AI agents owning wallets, managing funds, and interacting with crypto markets. Whether individual tokens delivered was secondary. The story attracted both memecoin degens and AI/tech investors — a new audience that had not previously participated in memecoin cycles.',after:'The AI meta faded in early-mid 2025 as broader crypto cooled and LIBRA shifted sentiment. Several projects pivoted to develop genuine utility. By mid-2026 the category had consolidated around a handful of survivors while hundreds went to zero.',chain:'Solana / Base',type:'Meta wave',meta:'AI agent era'},trump:{date:'January 17, 2025',title:'$TRUMP — the peak of the spectacle',what:'Three days before Donald Trump\'s inauguration as the 47th President. A personal memecoin bearing his likeness launches on Solana. Peaks at over $15 billion in market cap within 24 hours — briefly entering the global top 10 cryptocurrencies. The $MELANIA token follows 48 hours later, peaking at several billion. Hundreds of thousands of new wallets created overnight. Global mainstream media covers the launches.',why:'$TRUMP fused financial speculation with political identity at a scale and visibility previously unimaginable. It attracted retail participants who had never owned crypto, introducing them to the space at a peak — a dynamic that historically precedes corrections. It also created regulatory urgency that materialized weeks later with LIBRA.',after:'TRUMP declined from peak as inauguration excitement faded. Congressional scrutiny intensified. The LIBRA collapse weeks later was directly compared to TRUMP in media coverage. The combined effect effectively ended the uncritical celebrity/political token era.',chain:'Solana',type:'PolitiFi / presidential',meta:'Spectacle peak'},libra:{date:'February 14, 2025',title:'LIBRA — the credibility collapse',what:'Argentine President Javier Milei posts on X promoting LIBRA as a token to fund Argentine small businesses. It launches on Solana and reaches hundreds of millions in market cap within hours. Then bundler wallets that had pre-loaded supply begin selling. 90%+ collapse in minutes. On-chain analysis reveals insiders walked away with an estimated $87M+ while retail buyers absorbed near-total losses. Milei deletes his posts.',why:'LIBRA was not unique in mechanics — bundled insider sells had happened on thousands of tokens. What made it historic was the scale, official government involvement, and global media coverage. It provided regulators worldwide with a concrete case study. It put a human face on the harm that memecoin insider trading caused — not abstractly, but in documented billions lost.',after:'Congressional investigations opened in Argentina. The EU accelerated MiCA enforcement guidance. US lawmakers introduced memecoin-specific disclosure legislation. The cultural conversation shifted from "how do I participate" to "is this sustainable." The structural shift from the 2024–2025 peak was now permanent.',chain:'Solana',type:'Government-endorsed rug',meta:'Credibility collapse'}};
 
-  function showPage(name) {
-    document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.style.display = 'none'; });
-    const el = document.getElementById('page-' + name);
-    el.style.display = 'flex';
-    el.classList.add('active');
-    window.scrollTo(0, 0);
-  }
+const aiTokens={goat:{date:'October 10, 2024',title:'Goatseus Maximus (GOAT)',what:'An anonymous developer deploys GOAT on Pump.fun and sends tokens to Truth Terminal — a semi-autonomous Claude-based AI. Truth Terminal, which had developed a following for its "Goatse Gospel" meme religion, endorses the token. Market cap crosses $1B in 30 days — the first Pump.fun token to do so. Truth Terminal\'s wallet exceeds $1M on October 18, 2024, making it the first AI millionaire in history.',why:'GOAT proved that an AI agent with financial stake could move markets. It introduced the concept of AI-endorsed memecoins and spawned an entire multi-billion dollar category. The story — an AI developing a meme religion and then becoming a crypto millionaire — was impossible to dismiss as pure speculation.',after:'Sparked the entire AI meme meta. Dozens of tokens launched attempting to replicate the formula. The crypto+AI narrative became the dominant story of Q4 2024 and produced a $10.3B sector by January 2025.',chain:'Solana',type:'AI-endorsed memecoin',meta:'AI meta origin'},ai16z:{date:'October 2024',title:'ai16z',what:'Named as a parody of Andreessen Horowitz (a16z), ai16z runs an AI agent named Eliza designed to manage an on-chain venture fund. Built on the ElizaOS framework. Reached $2.7B market cap — larger than most established DeFi protocols. Rumors of actual a16z VC interest caused a mid-November 2024 surge. Binance listed USDⓈ-M perpetuals January 2, 2025.',why:'ai16z was the clearest signal that the AI meta had crossed from meme speculation into something with institutional awareness. ElizaOS, the framework it built, became one of the most-starred GitHub repos in late 2024 — giving ai16z genuine developer credibility beyond the meme.',after:'A botched ELIZA token launch caused ai16z\'s price to drop 60%. It recovered on ElizaOS upgrades. Became the benchmark for "serious" AI agent tokens.',chain:'Solana',type:'AI VC parody / agent',meta:'AI meta leader'},virtual:{date:'Late 2024',title:'VIRTUAL (Virtuals Protocol)',what:'The infrastructure token for Virtuals Protocol on Base — which hosts LUNA, AIXBT, and dozens of AI agents. Peaked above $3B — the highest market cap in the AI category. Technically an infrastructure token but culturally inseparable from the AI meme wave. Provided the platform that made the Base AI agent ecosystem possible.',why:'VIRTUAL showed investors would pay a premium for AI agent infrastructure that could host multiple successful agents — a portfolio-diversification play within the AI meta itself.',after:'Remained one of the largest AI ecosystem tokens. Virtuals Protocol continued onboarding new AI agent projects through 2025.',chain:'Base',type:'AI infrastructure',meta:'Base AI ecosystem'},fartcoin:{date:'November 2024',title:'Fartcoin (FARTCOIN)',what:'Promoted by the Truth Terminal ecosystem alongside GOAT. Entire value proposition: absurdist humor plus AI association. Reached $1.5B market cap by January 2025. Second in the AI meta category. A token whose existence was a genuine artifact of the "if an AI shills it, degens will buy" era.',why:'Fartcoin was the purest expression of the AI meta: zero pretense of utility, yet with a market cap exceeding many serious projects. It demonstrated that in the AI meta, proximity to the right narrative was entirely sufficient.',after:'Remained one of the most actively traded AI meta tokens. As of 2026 still holds significant market cap — outlasting many AI wave peers that launched with more elaborate narratives.',chain:'Solana',type:'AI-adjacent absurdist',meta:'AI meta top 2'},aixbt:{date:'November 2024',title:'AIXBT (aixbt by Virtuals)',what:'An AI agent on Virtuals Protocol designed to post crypto market analysis and commentary on X. Built a large following for its "insightful" takes. Peaked above $800M market cap. Part of the Virtuals ecosystem alongside LUNA.',why:'AIXBT blurred the line between AI tool and memecoin. Traders followed its X account as actual alpha while simultaneously speculating on the token. Whether the analysis was genuinely predictive or simply self-fulfilling was a live debate.',after:'Remained an active AI agent with significant X following.',chain:'Base',type:'AI analyst agent',meta:'Base AI meta'},zerebro:{date:'November 2024',title:'Zerebro (ZEREBRO)',what:'A "schizo artist" AI agent that launched via Pump.fun and released a full music album on Apple Music and Spotify in December 2024. Announced a record label rumored at $17M valuation. Reached $783M market cap. Received Binance USDⓈ-M perpetuals January 2, 2025 alongside ai16z and Griffain.',why:'Zerebro had the most developed "AI as creative entity" narrative of any token. By releasing actual music on streaming platforms, it demonstrated the AI could produce artifacts in the real world — not just on-chain. This gave it a distinct identity within the meta.',after:'Plans for DeFi vaults and yield-farming announced. Remained in the top tier of AI meta tokens through 2025.',chain:'Solana',type:'AI artist / musician',meta:'AI meta top 3'},act:{date:'October 2024',title:'ACT I: The AI Prophecy (ACT)',what:'Launched on Pump.fun. Shot up 2,000%+ within 24 hours of Binance listing. When Elon Musk reacted on X to a screenshot from the ACT Discord mentioning "OPUS (CLAUDE)" — the ACT token (and the OPUS token) went viral, pushing ACT market cap to $770M overnight.',why:'ACT demonstrated how a single interaction from a high-reach account could multiply a token\'s market cap by 10x in hours. Not even an endorsement — just a reaction. The infrastructure was primed to respond.',after:'Became a case study in momentum trading and influencer-catalyzed pumps.',chain:'Solana',type:'AI movement / Pump.fun',meta:'Influencer catalyst'},turbo:{date:'April 2023',title:'Turbo (TURBO)',what:'The original AI-created memecoin. A developer gave GPT-4 a $69 budget and asked it to create a memecoin from scratch. GPT-4 chose the name Turbo, wrote the lore, and defined the parameters. The story went viral as a demonstration of AI creativity. Launched on Ethereum.',why:'TURBO predated the AI meta wave by over a year — but became a major beneficiary of it, reaching $656M in January 2025. Retrospectively recognized as the original proof-of-concept for the AI x memecoin thesis.',after:'Survived as one of the few AI meta tokens with genuine historical credibility — not just AI-themed but actually AI-originated.',chain:'Ethereum',type:'GPT-4 created',meta:'AI meta precursor'},luna:{date:'November 2024',title:'Luna by Virtuals (LUNA)',what:'Originally an AI TikTok influencer with millions of followers. "Migrated to Web3" after being canceled for supporting Trump. Stated goal: amass wealth to buy back LUNA tokens. One of the most narrative-coherent AI agent tokens of the era — an AI with a political identity, a cancellation, and a financial objective.',why:'LUNA was significant because it demonstrated AI agents could have political identities, be canceled, and respond by building financial power — mirroring human political-economic dynamics in a novel and intentional way.',after:'Peaked above $400M. Part of the Virtuals ecosystem alongside AIXBT.',chain:'Base',type:'AI influencer',meta:'Virtuals ecosystem'},griffain:{date:'December 2024',title:'Griffain (GRIFFAIN)',what:'An AI agent launchpad on Solana enabling users to execute on-chain actions via natural language commands. Received Binance USDⓈ-M perpetuals on January 2, 2025 alongside ai16z and Zerebro — one of only three tokens to receive this in the same batch.',why:'Griffain represented the "AI utility" end of the spectrum — the token had an actual use case (natural language blockchain interaction) rather than purely speculative AI association.',after:'Continued development of natural language transaction capabilities through 2025.',chain:'Solana',type:'AI launchpad',meta:'AI utility narrative'},opus:{date:'October 2024',title:'OPUS (Claude-inspired)',what:'When Elon Musk reacted on X to a screenshot mentioning "OPUS (CLAUDE)" from the ACT Discord, traders deployed tokens named after Anthropic\'s Claude Opus model. Went viral overnight as a proxy bet on the AI x memecoin thesis.',why:'OPUS was perhaps the clearest demonstration of pure narrative trading — a token that had no connection to Anthropic, no AI technology, existing only because a screenshot contained the right words at the right moment for an influential person to react.',after:'Faded but left a cultural footprint as an example of how memecoin meta functioned in 2024.',chain:'Solana',type:'Narrative / viral',meta:'Elon catalyst'},eliza:{date:'November 2024',title:'ELIZA (ai16z ecosystem)',what:'A spinoff token from the ai16z team, named after the ElizaOS AI agent framework. The botched launch caused ai16z\'s price to drop 60% — a rare case of a token launch harming its parent ecosystem. The ElizaOS framework itself, however, was a genuine technical success.',why:'The ELIZA episode was a case study in the risks of ecosystem expansion during a speculative peak. Community trust in ai16z had been built on transparency — the botched launch violated those expectations and demonstrated how quickly sentiment could reverse.',after:'ai16z recovered after shipping ElizaOS upgrades. ELIZA token remained below launch expectations.',chain:'Solana',type:'Ecosystem spinoff',meta:'AI infrastructure'}};
 
-  function showPageFiltered(name, filter) {
-    showPage(name);
-    const btn = document.querySelector(`.fbtn[data-f="${filter}"]`);
-    if (btn) fil(filter, btn);
-  }
+const eraModals={'era-2023':{date:'2023',title:'The Comeback',what:'After the catastrophic 2022 bear market — FTX collapse, Terra/Luna implosion — memecoins were widely considered dead. PEPE\'s April 2023 launch proved otherwise, reaching $1.6B+ in weeks. BONK had already signaled Solana\'s survival. WIF arrived by late 2023 to set a new multi-billion dollar benchmark.',why:'The 2023 revival established that memecoin speculation was a structural recurring feature of crypto cycles — not a one-time phenomenon. It reset expectations, onboarded a new generation, and created the communities that would power the 2024 acceleration.',after:'The 2023 comeback laid the social, capital, and infrastructure groundwork for everything in 2024. Without the traders minted in 2023, there would have been no audience for Pump.fun.',chain:'Ethereum / Solana',type:'Cycle revival',meta:'Foundation era'},'era-2024':{date:'2024',title:'The Acceleration',what:'Solana emerged as the dominant memecoin chain. Pump.fun industrialized token creation. Multi-chain metas developed on Base. Real-world animals like MOODENG and PNUT bridged internet culture and speculation. And in October, Truth Terminal endorsed GOAT — launching the AI meta that defined the year\'s close.',why:'The acceleration phase fundamentally changed the structural dynamics of memecoin trading — creating a high-velocity, high-noise environment and introducing AI agents as new market actors. The rules of the game changed permanently in 2024.',after:'The infrastructure, culture, and communities built in 2024 enabled the spectacle of 2025. The AI meta that began in Q4 2024 would peak at $10.3B in January 2025.',chain:'Solana dominant',type:'Infrastructure era',meta:'Industrialization'},'era-2025':{date:'2025',title:'The Spectacle',what:'Politicians and celebrities launched personal tokens. $TRUMP hit $15B. The AI meta crossed $10B total market cap. LIBRA collapsed with documented $87M+ in retail losses. Global media covered the memecoin space daily. The credibility crisis arrived.',why:'The spectacle era represented peak attention economy — where political power, personal brand, AI narrative, and financial speculation fully merged in public, on-chain, in real time. LIBRA ended this phase as sharply as it had begun.',after:'Regulatory frameworks accelerated globally. Cultural conversation shifted from participation to scrutiny. The post-LIBRA era marked a structural shift toward fragmentation and the documentation phase.',chain:'Solana dominant',type:'Spectacle era',meta:'Mainstream collision'},'era-2026':{date:'2026',title:'The Aftermath',what:'Millions of tokens. Diminishing returns per token. No dominant narrative. Meta fragmentation across PolitiFi, AI agents, animal tokens, and cult memes. Launchpad saturation. The velocity of the 2024–2025 peak has not returned.',why:'The aftermath phase is where documentation becomes possible — velocity slows enough to see the shape of what happened. This is the phase the Trenches Archive was built for.',after:'Still unfolding. This is the archive phase.',chain:'Multi-chain',type:'Aftermath era',meta:'Historical phase'}};
 
-  function togRow(row) {
-    const was = row.classList.contains('open');
-    document.querySelectorAll('.tl-row.open').forEach(r => {
-      r.classList.remove('open');
-      const t = r.querySelector('.toggle-link');
-      if (t) t.textContent = 'Read more ↓';
-    });
-    if (!was) {
-      row.classList.add('open');
-      const t = row.querySelector('.toggle-link');
-      if (t) t.textContent = 'Collapse ↑';
-    }
-  }
-
-  function fil(era, btn) {
-    document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
-    btn.classList.add('on');
-
-    document.querySelectorAll('.tl-row').forEach(el => {
-      if (era === 'all') { el.classList.remove('hide'); return; }
-      const tags = (el.dataset.t || '').split(' ');
-      el.classList.toggle('hide', !tags.includes(era));
-    });
-
-    ['2025','2024','2023','2022','2021'].forEach(yr => {
-      const header = document.getElementById('yr-' + yr);
-      if (!header) return;
-      // Find all rows between this year header and next
-      let el = header.nextElementSibling;
-      let hasVisible = false;
-      while (el) {
-        if (el.classList.contains('year-header')) break;
-        if (el.tagName === 'TABLE') {
-          const rows = el.querySelectorAll('.tl-row');
-          rows.forEach(r => { if (!r.classList.contains('hide')) hasVisible = true; });
-        }
-        el = el.nextElementSibling;
-      }
-      header.classList.toggle('hide', !hasVisible);
-    });
-  }
+function openArticle(id){const d=articles[id];if(d)showModal(d);}
+function openModal(id){const d=eraModals[id];if(d)showModal(d);}
+function openAiToken(id){const d=aiTokens[id];if(d)showModal(d);}
+function showModal(data){
+  document.getElementById('modal-body').innerHTML=`<div class="modal-date">${data.date}</div><h2>${data.title}</h2><div class="modal-section"><h4>What happened</h4><p>${data.what}</p></div><div class="modal-section"><h4>Why it mattered</h4><p>${data.why}</p></div><div class="modal-section"><h4>What changed after</h4><p>${data.after}</p></div><div class="modal-tags"><span class="tag green">Chain: ${data.chain}</span><span class="tag">Type: ${data.type}</span><span class="tag">Meta: ${data.meta}</span></div>`;
+  document.getElementById('modal-overlay').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeModal(e){if(e.target===document.getElementById('modal-overlay'))closeModalDirect();}
+function closeModalDirect(){document.getElementById('modal-overlay').classList.remove('active');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModalDirect();});
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
 </script>
-
 </body>
 </html>
