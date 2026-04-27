@@ -15,9 +15,13 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:1px solid var(--border);background:rgba(11,11,11,0.95);backdrop-filter:blur(12px);}
 .nav-logo{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--off-white);text-decoration:none;}
 .nav-logo span{color:var(--green);}
+.nav-right{display:flex;align-items:center;gap:28px;}
 .nav-links{display:flex;gap:28px;list-style:none;}
 .nav-links a{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color 0.2s;}
 .nav-links a:hover{color:var(--green);}
+.nav-x{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid var(--border);color:var(--gray);text-decoration:none;transition:border-color 0.2s,color 0.2s;flex-shrink:0;}
+.nav-x:hover{border-color:var(--off-white);color:var(--off-white);}
+.nav-x svg{width:13px;height:13px;fill:currentColor;}
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 40px 80px;position:relative;overflow:hidden;}
 .hero-grid{position:absolute;inset:0;pointer-events:none;opacity:0.04;background-image:repeating-linear-gradient(0deg,transparent,transparent 80px,var(--off-white) 80px,var(--off-white) 81px),repeating-linear-gradient(90deg,transparent,transparent 120px,var(--off-white) 120px,var(--off-white) 121px);}
 .hero-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--green);margin-bottom:24px;display:flex;align-items:center;gap:12px;}
@@ -143,8 +147,6 @@ footer{padding:48px 40px;display:flex;align-items:center;justify-content:space-b
 .modal-section p{font-size:13px;color:var(--gray);line-height:2;}
 .modal-section p em{color:var(--off-white);font-style:normal;}
 .modal-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:32px;padding-top:24px;border-top:1px solid var(--border);}
-.cursor{display:inline-block;width:2px;height:1em;background:var(--green);margin-left:4px;vertical-align:middle;animation:blink 1s step-end infinite;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
 .fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
 .fade-in.visible{opacity:1;transform:translateY(0);}
 @media(max-width:900px){
@@ -166,19 +168,24 @@ footer{padding:48px 40px;display:flex;align-items:center;justify-content:space-b
 
 <nav>
   <a href="#" class="nav-logo">THE TRENCHES <span>ARCHIVE</span></a>
-  <ul class="nav-links">
-    <li><a href="#timeline">Timeline</a></li>
-    <li><a href="#ai-meta">AI Meta</a></li>
-    <li><a href="#articles">Articles</a></li>
-    <li><a href="#glossary">Glossary</a></li>
-    <li><a href="#about">About</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#ai-meta">AI Meta</a></li>
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="#glossary">Glossary</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a href="https://x.com/trenchhistory" target="_blank" rel="noopener noreferrer" class="nav-x" title="Follow on X">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+  </div>
 </nav>
 
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="hero-eyebrow">Est. 2023 — Present</div>
-  <h1>The Trenches<span class="line2">Archive<span class="cursor"></span></span></h1>
+  <h1>The Trenches<span class="line2">Archive</span></h1>
   <p class="hero-desc">From <em>PEPE</em> and <em>BONK</em> to <em>WIF</em>, Pump.fun, <em>TRUMP</em>, <em>LIBRA</em>, and the <em>AI agent meta</em> — a living historical record of the memecoin era.<br><br>Not alpha. Not shills. Not financial advice.<br>Just the timeline of what actually happened.</p>
   <div class="hero-buttons">
     <a href="#timeline" class="btn btn-primary">Explore Timeline</a>
